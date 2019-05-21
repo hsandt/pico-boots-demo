@@ -1,0 +1,11 @@
+return {
+
+	include = {
+		"src"
+	},
+
+	exclude = {
+		"src/test_"
+	}
+
+}

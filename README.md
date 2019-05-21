@@ -1,6 +1,6 @@
 # Pico-Boots Demo
 
-This project demonstrates the features of the Pico-Boots framework for PICO-8.
+This project demonstrates the features of the [Pico-Boots framework for PICO-8](https://github.com/hsandt/pico-boots).
 
 ## Build
 
@@ -40,16 +40,11 @@ Tests run under Lua 5.3, although Lua 5.2 should also have the needed features (
 
 A Lua unit test framework ([GitHub](https://github.com/Olivine-Labs/busted))
 
-The test script (`test.sh`) only works on Linux (it uses gnome-terminal).
-
 ### Run unit tests and headless integration tests
 
-To test the modules:
+To run all the unit tests:
 
-* `cd path/to/sonic-pico8-repo`
-* `./test.sh all` or `./test.sh all all` if you want to include `#mute` tests (longer)
-
-This will run all the unit tests, as well as headless integration tests. To only run the latter type, use `./test.sh headless_itests`.
-
+* `cd path/to/pico-boots-demo`
+* `./test.sh`
 
 The test script (test.sh) only works on Linux (it uses gnome-terminal).

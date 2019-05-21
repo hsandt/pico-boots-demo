@@ -1,0 +1,18 @@
+# Build
+/intermediate
+/build
+
+# Log
+/log
+
+# Backup
+/backup
+
+# Code coverage report
+*.out
+
+# Python
+*.pyc
+
+# Sublime Text
+*.sublime-workspace

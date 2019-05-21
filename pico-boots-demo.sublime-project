@@ -1,0 +1,58 @@
+{
+	"folders":
+	[
+		{
+			"path": "."
+		}
+	],
+	"build_systems":
+	[
+		{
+			"name": "Game: build",
+			"working_dir": "${project_path}",
+			"shell": true,
+			"cmd": ["./build.sh"],
+			"file_regex": "(.*\\.sh)(?:\\: line )([\\d]+)(?:\\:)([\\d]+)? (.*)",
+			"syntax": "Packages/Python/Python.sublime-syntax"
+		},
+		{
+			"name": "Game: build and run",
+			"working_dir": "${project_path}",
+			"shell": true,
+			"cmd": ["./build.sh && ./run.sh"],
+			"file_regex": "(.*\\.sh)(?:\\: line )([\\d]+)(?:\\:)([\\d]+)? (.*)",
+			"syntax": "Packages/Python/Python.sublime-syntax"
+		},
+		{
+			"name": "Game: run",
+			"working_dir": "${project_path}",
+			"shell": true,
+			"cmd": ["./run.sh"],
+			"syntax": "Packages/Python/Python.sublime-syntax"
+		},
+		{
+			"name": "Game: test all",
+			"working_dir": "${project_path}",
+			"shell": true,
+			"cmd": ["./test.sh"],
+			// file regex works fine except for last \n which apparently doesn't work in build output
+			"file_regex": "((?:src)\\/[-\\w\\/]+\\.lua)(?:\\:| @ )([\\d]+)(?:\\:)?([\\d]+)?\\n?(.*)",
+			"syntax": "Packages/Python/Python.sublime-syntax"
+		},
+		{
+			"name": "Postbuild: test add_metadata",
+			"working_dir": "${project_path}",
+			"shell": true,
+			"cmd": ["python3 -m postbuild.test_add_metadata"],
+			"file_regex": "\"(.*\\.py)\"(?:, line )([\\d]+)(?:\\:)?([\\d]+)?, (.*)",
+			"syntax": "Packages/Python/Python.sublime-syntax"
+		}
+	],
+	"syntax_override":
+	{
+		"\\.lua$":
+		[
+			"PICO-8/PICO-8"
+		]
+	}
+}
