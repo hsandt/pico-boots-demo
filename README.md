@@ -18,7 +18,9 @@ Prebuild and postbuild scripts are written in Python 3 and use 3.6 features such
 
 #### picotool
 
-A build pipeline for PICO-8 ([GitHub](https://github.com/dansanderson/picotool))
+A build pipeline for PICO-8 ([GitHub](https://github.com/dansanderson/picotool)).
+
+You must add p8tool to your `PATH`.
 
 ### Build and run
 
@@ -40,11 +42,11 @@ Tests run under Lua 5.3, although Lua 5.2 should also have the needed features (
 
 A Lua unit test framework ([GitHub](https://github.com/Olivine-Labs/busted))
 
+`busted` must be in your path.
+
 ### Run unit tests and headless integration tests
 
 To run all the unit tests:
 
 * `cd path/to/pico-boots-demo`
 * `./test.sh`
-
-The test script (test.sh) only works on Linux (it uses gnome-terminal).
