@@ -1,12 +1,16 @@
 # Pico-Boots Demo
 
-This project demonstrates the features of the [Pico-Boots framework for PICO-8](https://github.com/hsandt/pico-boots).
+This project demonstrates the features of the [pico-boots framework for PICO-8](https://github.com/hsandt/pico-boots).
+
+## Development status
+
+The repository is currently a stub. It only contains the build/test pipeline and doesn't integrate pico-boots yet.
 
 ## Build
 
 ### Supported platforms
 
-Only Linux Ubuntu (and supposedly the Debian family) is fully supported to build the game from sources. Other Linux distributions and UNIX platforms should be able to run most scripts, providing the right tools are installed, but a few references like `gnome-terminal` in `run.sh` would require adaptation.
+The build and test pipeline has been tested on Linux Ubuntu. Other Linux distributions and UNIX platforms should be able to run most scripts, providing the right tools are installed.
 
 Development environments for Windows such as MinGW and Cygwin have not been tested.
 
