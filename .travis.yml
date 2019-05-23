@@ -12,20 +12,24 @@ env:
 cache:
   apt: true  # private repositories only
   directories:
-    - lua$LUA_VERSION  # for hererocks
-    - tool    # for picotool; remember to "travis cache --delete" in travis CL each time p8tool needs upgrade
-    - $HOME/.cache
+    # remember to "travis cache --delete" in travis CL each time a custom cached directory needs upgrade (unlike cached packages)
+    - hererocks     # for hererocks (make a parent folder, then install lua inside, to make sure the folder will be used as cache)
+                    # just a small optimization to cache the whole lua install, since the hererocks pip wheel is cached with .cache/pip anyway
+    - tool          # for picotool
+    - $HOME/.cache  # for .cache/luarocks and .cache/pip
 
 before_install:
   # install hererocks if needed
   - |
     if [[ ! -d lua$LUA_VERSION || ! -x lua$LUA_VERSION/bin/activate ]]; then
       pip install hererocks
+      pushd hererocks
       hererocks lua$LUA_VERSION --lua $LUA_VERSION -rlatest
+      popd
     fi
 
   # activate Lua
-  - source lua$LUA_VERSION/bin/activate
+  - source hererocks/lua$LUA_VERSION/bin/activate
 
 install:
   # install lua packages for testing
@@ -49,7 +53,7 @@ before_script:
 
 script:
   # test
-  - ./test.sh
+  - ./test.sh all
   # coverage
   - bash <(curl -s https://codecov.io/bash)
   # build for deploy
