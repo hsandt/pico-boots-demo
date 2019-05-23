@@ -6,14 +6,14 @@ import shutil, tempfile
 import sys
 
 # This script does 3 things:
-# 1. Add game title and author at the top of source code for .p8.png
+# 1. Add game title and author a.k.a. "header" at the top of source code for .p8.png
 # 2. Add __label__ section from separate file for .p8.png if label_filepath is not '-' (to make up for the lack of --label option in p8tool)
 # 3. Fix pico-8 version to 16 (instead of 8 with current p8tool behavior)
 
 # Usage:
 # add_metadata.py filepath label_filepath
 # filepath:         built game path
-# label_filepath:   path of file containing label data (pass '-' to preserve label from overwritten built game file if any)
+# label_filepath:   path of file containing label data (pass '-' to preserve label from any existing file at output path overwritten during the build)
 
 
 def add_title_author_info(filepath, title, author):

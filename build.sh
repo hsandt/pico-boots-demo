@@ -22,9 +22,13 @@ echo "Pre-build..."
 # at the output file path, so this is effectively a way to setup the label.
 # However, title and author are lost during the process and must be manually added to the header with add_metadata.py
 mkdir -p build
-PREBUILD_CMD="cp data/metadata.p8 \"$OUTPUT_FILEPATH\""
-echo "> $PREBUILD_CMD"
-bash -c "$PREBUILD_CMD"
+
+if [[ -f data/metadata.p8 ]]; then
+	CP_LABEL_CMD="cp data/metadata.p8 \"$OUTPUT_FILEPATH\""
+	echo "> $CP_LABEL_CMD"
+	bash -c "$CP_LABEL_CMD"
+fi
+
 
 if [[ $? -ne 0 ]]; then
     echo "Pre-build step failed, STOP."
@@ -52,9 +56,9 @@ echo "Post-build..."
 # Add metadata to cartridge
 # Since label has been setup during Prebuild, we don't need to add it with add_metadata.py anymore
 # Thefore, for the `label_filepath` argument just pass the none value "-"
-POSTBUILD_CMD="postbuild/add_metadata.py \"$OUTPUT_FILEPATH\" \"-\" \"pico-boots demo\" \"hsandt\""
-echo "> $POSTBUILD_CMD"
-bash -c "$POSTBUILD_CMD"
+ADD_HEADER_CMD="postbuild/add_metadata.py \"$OUTPUT_FILEPATH\" \"-\" \"pico-boots demo\" \"hsandt\""
+echo "> $ADD_HEADER_CMD"
+bash -c "$ADD_HEADER_CMD"
 
 if [[ $? -ne 0 ]]; then
 	echo "Add metadata failed, STOP."

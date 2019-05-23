@@ -1,8 +1,15 @@
 pico-8 cartridge // http://www.pico-8.com
 version 16
 __lua__
--- sonic pico-8
--- by hsandt
+-- normally, this section starts with:
+-- [game title]
+-- by [author]
+
+-- but when p8tool overwrites a copy of this file as the output target,
+--   it only preserves __label__, not the __lua__ header, so what is written here is actually irrelevant
+
+-- to define the label used when exporting the game as .p8.png, capture a label of your game inside PICO-8 with F2 or F5,
+-- escape, in the PICO-8 terminal enter `save label.p8`, then copy the __label__ section of label.p8 and paste it just below
 __label__
 60606660660066606660666000000000660060000000660000000000000000000000000000000000000000000000000000000000000000000000000000000000
 60606060606060600600600006000000060060000000060000000000000000000000000000000000000000000000000000000000000000000000000000000000

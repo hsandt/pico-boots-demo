@@ -8,6 +8,18 @@
 	"build_systems":
 	[
 		{
+			"name": "Game: edit data",
+			"shell": true,
+			"cmd": ["./edit_data.sh"],
+			"working_dir": "${project_path}"
+		},
+		{
+			"name": "Game: edit metadata",
+			"shell": true,
+			"cmd": ["./edit_metadata.sh"],
+			"working_dir": "${project_path}"
+		},
+		{
 			"name": "Game: build",
 			"working_dir": "${project_path}",
 			"shell": true,
