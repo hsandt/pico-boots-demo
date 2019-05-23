@@ -7,7 +7,7 @@ echo "Testing all..."
 CLEAN_COVERAGE_CMD="rm -f luacov.stats.out luacov.report.out"
 
 # Run all unit tests
-LUA_PATH="src/?.lua"
+LUA_PATH="src/?.lua;pico-boots/src/?.lua"
 CORE_TEST_CMD="busted src --lpath=\"$LUA_PATH\" -p \"test_\" -c -v"
 
 # Generate luacov report and display all uncovered lines (starting with *0) and coverage percentages

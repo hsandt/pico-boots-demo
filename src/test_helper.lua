@@ -1,3 +1,4 @@
+require("engine/test/bustedhelper")
 require("helper")
 
 describe('sum', function ()

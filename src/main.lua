@@ -1,3 +1,4 @@
+require("engine/pico8/api")
 require("helper")
 
 local i = 0
@@ -11,5 +12,5 @@ function _update60()
 end
 
 function _draw()
-  -- draw code
+  api.print("test")
 end

@@ -1,7 +1,13 @@
 #!/bin/bash
 # Build game.p8 file from the main source file
+# Requirements:
+# - main source file must be at src/main.lua
+# - other game source files must be in src/ and required via relative path from src/
+# - engine must be cloned in pico-boots and engine source files must be required via relative path from pico-boots/src
+
 
 MAIN_FILEPATH="src/main.lua"
+LUA_PATH="$(pwd)/src/?.lua;$(pwd)/pico-boots/src/?.lua"
 OUTPUT_FILEPATH="build/game.p8"
 
 echo "Building '$MAIN_FILEPATH' -> '$OUTPUT_FILEPATH'"
@@ -29,7 +35,9 @@ echo ""
 echo "Build..."
 
 # Build the game from the main script
-BUILD_CMD="p8tool build --lua \"$MAIN_FILEPATH\" --lua-path=\"$(pwd)/src/?.lua\" --gfx data/data.p8 --gff data/data.p8 --map data/data.p8 --sfx data/data.p8 --music data/data.p8 \"$OUTPUT_FILEPATH\""
+BUILD_CMD="p8tool build --lua \"$MAIN_FILEPATH\" --lua-path=\"$LUA_PATH\" 						   \
+  --gfx data/data.p8 --gff data/data.p8 --map data/data.p8 --sfx data/data.p8 --music data/data.p8 \
+  \"$OUTPUT_FILEPATH\""
 echo "> $BUILD_CMD"
 bash -c "$BUILD_CMD"
 
