@@ -5,7 +5,7 @@
 # - other game source files must be in src/ and required via relative path from src/
 # - engine must be cloned in pico-boots and engine source files must be required via relative path from pico-boots/src
 
-
+# Configuration
 MAIN_FILEPATH="src/main.lua"
 LUA_PATH="$(pwd)/src/?.lua;$(pwd)/pico-boots/src/?.lua"
 OUTPUT_FILEPATH="build/game.p8"

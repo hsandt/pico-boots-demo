@@ -43,13 +43,24 @@
 			"syntax": "Packages/Python/Python.sublime-syntax"
 		},
 		{
-			"name": "Game: test all",
+			"name": "Game: test",
 			"working_dir": "${project_path}",
 			"shell": true,
-			"cmd": ["./test.sh"],
+			"cmd": ["./test.sh game"],
 			// file regex works fine except for last \n which apparently doesn't work in build output
-			"file_regex": "((?:src)\\/[-\\w\\/]+\\.lua)(?:\\:| @ )([\\d]+)(?:\\:)?([\\d]+)?\\n?(.*)",
-			"syntax": "Packages/Python/Python.sublime-syntax"
+			"file_regex": "((?:pico-boots/src|src)\\/[-\\w\\/]+\\.lua)(?:\\:| @ )([\\d]+)(?:\\:)?([\\d]+)?\\n?(.*)",
+			"syntax": "Packages/Python/Python.sublime-syntax",
+			"variants":
+			[
+				{
+					"name": "all",
+					"cmd": ["./test.sh all"],
+				},
+				{
+					"name": "engine",
+					"cmd": ["./test.sh all"],
+				}
+			]
 		},
 		{
 			"name": "Postbuild: test add_metadata",
