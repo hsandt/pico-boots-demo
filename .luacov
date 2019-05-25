@@ -1,7 +1,7 @@
 return {
 
 	exclude = {
-		"src/test_"
+		"src/utest_"
 	}
 
 }

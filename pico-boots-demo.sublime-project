@@ -46,7 +46,7 @@
 			"name": "Game: test",
 			"working_dir": "${project_path}",
 			"shell": true,
-			"cmd": ["./test.sh game"],
+			"cmd": ["./test.sh $file_base_name"],
 			// file regex works fine except for last \n which apparently doesn't work in build output
 			"file_regex": "((?:pico-boots/src|src)\\/[-\\w\\/]+\\.lua)(?:\\:| @ )([\\d]+)(?:\\:)?([\\d]+)?\\n?(.*)",
 			"syntax": "Packages/Python/Python.sublime-syntax",
@@ -54,11 +54,15 @@
 			[
 				{
 					"name": "all",
-					"cmd": ["./test.sh all"],
+					"cmd": ["./test.sh"],
 				},
 				{
 					"name": "engine",
-					"cmd": ["./test.sh all"],
+					"cmd": ["./test.sh -p engine"],
+				},
+				{
+					"name": "game",
+					"cmd": ["./test.sh -p game"],
 				}
 			]
 		},
