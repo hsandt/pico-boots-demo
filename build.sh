@@ -6,11 +6,16 @@
 # - engine must be cloned in pico-boots and engine source files must be required via relative path from pico-boots/src
 
 # Configuration
+ENGINE_PATH="pico-boots"
 MAIN_FILEPATH="src/main.lua"
-LUA_PATH="$(pwd)/src/?.lua;$(pwd)/pico-boots/src/?.lua"
+# picotool uses require paths relative to the requiring scripts, so for project source we need to indicate the full path
+LUA_PATH="$(pwd)/src/?.lua;$(pwd)/$ENGINE_PATH/src/?.lua"
 OUTPUT_FILEPATH="build/game.p8"
 
 echo "Building '$MAIN_FILEPATH' -> '$OUTPUT_FILEPATH'"
+
+# Move to current script directory so relative paths are always valid
+pushd "$(dirname $0)"
 
 # clean up any existing output file
 rm -f "$OUTPUT_FILEPATH"
@@ -31,8 +36,10 @@ fi
 
 
 if [[ $? -ne 0 ]]; then
-    echo "Pre-build step failed, STOP."
-    exit 1
+  echo "Pre-build step failed, STOP."
+
+  popd
+  exit 1
 fi
 
 echo ""
@@ -46,8 +53,10 @@ echo "> $BUILD_CMD"
 bash -c "$BUILD_CMD"
 
 if [[ $? -ne 0 ]]; then
-    echo "Build step failed, STOP."
-    exit 1
+  echo "Build step failed, STOP."
+
+  popd
+  exit 1
 fi
 
 echo ""
@@ -56,15 +65,18 @@ echo "Post-build..."
 # Add metadata to cartridge
 # Since label has been setup during Prebuild, we don't need to add it with add_metadata.py anymore
 # Thefore, for the `label_filepath` argument just pass the none value "-"
-ADD_HEADER_CMD="postbuild/add_metadata.py \"$OUTPUT_FILEPATH\" \"-\" \"pico-boots demo\" \"hsandt\""
+ADD_HEADER_CMD="$ENGINE_PATH/scripts/add_metadata.py \"$OUTPUT_FILEPATH\" \"-\" \"pico-boots demo\" \"hsandt\""
 echo "> $ADD_HEADER_CMD"
 bash -c "$ADD_HEADER_CMD"
 
 if [[ $? -ne 0 ]]; then
-	echo "Add metadata failed, STOP."
-	exit 1
+echo "Add metadata failed, STOP."
+
+popd
+exit 1
 fi
 
 echo ""
 echo "Build succeeded: $OUTPUT_FILEPATH"
-exit 0
+
+popd
