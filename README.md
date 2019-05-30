@@ -1,4 +1,4 @@
-# Pico-Boots Demo
+# pico-boots demo
 
 This project demonstrates the features of the [pico-boots framework for PICO-8](https://github.com/hsandt/pico-boots).
 

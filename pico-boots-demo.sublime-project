@@ -23,7 +23,7 @@
 			"name": "Game: build",
 			"working_dir": "${project_path}",
 			"shell": true,
-			"cmd": ["./build.sh"],
+			"cmd": ["pico-boots/scripts/build.sh src/main.lua -o build/picoboots_demo.p8 -d data/data.p8 -m data/metadata.p8 -a author -t title"],
 			"file_regex": "(.*\\.sh)(?:\\: line )([\\d]+)(?:\\:)([\\d]+)? (.*)",
 			"syntax": "Packages/Python/Python.sublime-syntax"
 		},
@@ -31,7 +31,7 @@
 			"name": "Game: build and run",
 			"working_dir": "${project_path}",
 			"shell": true,
-			"cmd": ["./build.sh && ./run.sh"],
+			"cmd": ["pico-boots/scripts/build.sh -o build/picoboots_demo.p8 -d data/data.p8 -m data/metadata.p8 -a author -t title && ./run.sh"],
 			"file_regex": "(.*\\.sh)(?:\\: line )([\\d]+)(?:\\:)([\\d]+)? (.*)",
 			"syntax": "Packages/Python/Python.sublime-syntax"
 		},
