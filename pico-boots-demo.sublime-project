@@ -47,7 +47,7 @@
 			"working_dir": "${project_path}",
 			"shell": true,
 			"cmd": ["./test.sh $file_base_name"],
-			// file regex works fine except for last \n which apparently doesn't work in build output
+			// known limitation: last \n won't be detected in build output, so cannot display multi-line errors
 			"file_regex": "((?:pico-boots/src|src)\\/[-\\w\\/]+\\.lua)(?:\\:| @ )([\\d]+)(?:\\:)?([\\d]+)?\\n?(.*)",
 			"syntax": "Packages/Python/Python.sublime-syntax",
 			"variants":
@@ -67,10 +67,91 @@
 			]
 		},
 		{
-			"name": "Postbuild: test add_metadata",
+			"name": "Engine: test",
+			"working_dir": "${project_path}/pico-boots",
+			"shell": true,
+			"cmd": ["./test.sh -f $file_base_name"],
+			// known limitation: last \n won't be detected in build output, so cannot display multi-line errors
+			"file_regex": "((?:pico-boots/src|src)\\/[-\\w\\/]+\\.lua)(?:\\:| @ )([\\d]+)(?:\\:)?([\\d]+)?\\n?(.*)",
+			"syntax": "Packages/Python/Python.sublime-syntax",
+			"variants":
+			[
+				{
+					"name": "(solo)",
+					"cmd": ["./test.sh -f $file_base_name -m solo"]
+				},
+				{
+					"name": "(all)",
+					"cmd": ["./test.sh -f $file_base_name -m all"]
+				},
+				{
+					"name": "*",
+					"cmd": ["./test.sh"]
+				},
+				{
+					"name": "* (solo)",
+					"cmd": ["./test.sh -m solo"]
+				},
+				{
+					"name": "* (all)",
+					"cmd": ["./test.sh -m all"]
+				},
+				{
+					"name": "application",
+					"cmd": ["./test.sh application"]
+				},
+				{
+					"name": "core",
+					"cmd": ["./test.sh core"]
+				},
+				{
+					"name": "data",
+					"cmd": ["./test.sh data"]
+				},
+				{
+					"name": "debug",
+					"cmd": ["./test.sh debug"]
+				},
+				{
+					"name": "input",
+					"cmd": ["./test.sh input"]
+				},
+				{
+					"name": "physics",
+					"cmd": ["./test.sh physics"]
+				},
+				{
+					"name": "render",
+					"cmd": ["./test.sh render"]
+				},
+				{
+					"name": "test",
+					"cmd": ["./test.sh test"]
+				},
+				{
+					"name": "physics",
+					"cmd": ["./test.sh physics"]
+				},
+				{
+					"name": "ui",
+					"cmd": ["./test.sh ui"],
+				}
+			]
+		},
+		{
+			"name": "All: test",
 			"working_dir": "${project_path}",
 			"shell": true,
-			"cmd": ["python3 -m postbuild.test_add_metadata"],
+			"cmd": ["./test.sh && echo '' && pico-boots/test.sh"],
+			// known limitation: last \n won't be detected in build output, so cannot display multi-line errors
+			"file_regex": "((?:pico-boots/src|src)\\/[-\\w\\/]+\\.lua)(?:\\:| @ )([\\d]+)(?:\\:)?([\\d]+)?\\n?(.*)",
+			"syntax": "Packages/Python/Python.sublime-syntax"
+		},
+		{
+			"name": "Postbuild: test add_metadata",
+			"working_dir": "${project_path}/pico-boots",
+			"shell": true,
+			"cmd": ["python3 -m scripts.test_add_metadata"],
 			"file_regex": "\"(.*\\.py)\"(?:, line )([\\d]+)(?:\\:)?([\\d]+)?, (.*)",
 			"syntax": "Packages/Python/Python.sublime-syntax"
 		}
