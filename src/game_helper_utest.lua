@@ -1,5 +1,5 @@
 require("engine/test/bustedhelper")
-require("helper")
+require("game_helper")
 
 describe('sum', function ()
   it('should return the sum of two numbers', function ()

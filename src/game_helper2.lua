@@ -1,5 +1,5 @@
 local t = {}
-require("helper")
+require("game_helper")
 
 function t.sub(a, b)
   return sum(a, b) - 2 * b
