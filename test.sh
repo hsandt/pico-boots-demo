@@ -1,129 +1,69 @@
 #!/bin/bash
 
-# Test all test files found in source
-
 # Configuration
-ENGINE_SRC="pico-boots/src"
+picoboots_src_path="$(dirname "$0")/pico-boots/src"
+picoboots_scripts_path="$(dirname "$0")/pico-boots/scripts"
 
 help() {
-  echo "Usage: test.sh [FILE_BASE_NAME] [-p PROJECT]
+  echo "Test game or pico-boots modules with busted
+
+This is essentially a proxy script for pico-boots/scripts/test_scripts.sh that avoids
+passing src/FOLDER every time we want to test a group of scripts in the game.
+
+It doesn't prepend the engine path though, so if you want to test engine folders easily,
+use pico-boots/test.sh instead.
+
+Dependencies:
+- busted (must be in PATH)
+- luacov (must be in PATH)
+"
+usage
+}
+
+usage() {
+  echo "Usage: test.sh [FOLDER-1 [FOLDER-2 [...]]]
 
 ARGUMENTS
-    FILE_BASE_NAME          basename of either the module to test or the test itself.
-                            If FILE_BASE_NAME starts with 'utest_', it is stripped
-                            to define MODULE. Else, it is directly assigned to MODULE.
-                            A test file named 'utest_${MODULE}.lua' should exist.
-                            If empty, all test files found in the target
-                            project(s) are tested.
-                            (optional, default: '')
+  FOLDER                    Path to game folder to test.
+                            Path is relative to src. Sub-folders are supported.
+                            (optional)
 
-OPTIONS
-    -p, --project PROJECT   PROJECT must be 'engine', 'game' or 'all'.
-                            Only test files found in the corresponding
-                            directory(-ies) are tested.
-                            (optional, default: 'all')
+  -h, --help                Show this help message
 "
 }
 
 # Default parameters
-MODULE=""
-PROJECT="all"
+folders=()
+other_options=()
 
+# Read arguments
 # https://stackoverflow.com/questions/192249/how-do-i-parse-command-line-arguments-in-bash
-
-POSITIONAL=()
-
+roots=()
 while [[ $# -gt 0 ]]; do
   case $1 in
-    -p | --project )
-      if [[ $# -lt 2 ]] ; then
-        echo "Missing argument for $1"
-        help
-        exit 1
-      fi
-      PROJECT="$2"
-      shift # past argument
-      shift # past value
-      ;;
-    -* )    # unknown option
-      echo "Unknown option: '$1'"
+    -h | --help )
       help
-      exit 1
+      exit 0
       ;;
-    * )     # positional argument
-      POSITIONAL+=("$1") # save it in an array for later
+    -* )    # we started adding options
+            # since we don't support "--" for final positional arguments, just pass all the rest to test_scripts.sh
+      break
+      ;;
+    * )     # positional argument: folder
+      folders+=("$1")
       shift # past argument
       ;;
   esac
 done
 
-set -- "${POSITIONAL[@]}" # restore positional parameters
-
-# Check positional arguments
-if [[ $# -gt 1 ]] ; then
-  echo "Too many arguments"
-  help
-  exit 1
-fi
-
-if [[ $# -gt 0 ]] ; then
-  # if file basename designates a utest, already,
-  # extract the name of the tested module
-  if [[ ${1::6} = "utest_" ]] ; then
-    MODULE=${1:6}
-  else
-    MODULE=$1
-  fi
-  shift
-fi
-
-if [[ -z $MODULE ]] ; then
-  # no specific file to test, test them all (inside target project directories)
-  TEST_FILE_PATTERN="utest_"
-  MODULE_STR="all modules"
+# Paths are relative to src/engine, so prepend it before passing to actual test script
+if [[ ${#folders[@]} -ne 0 ]]; then
+  for folder in "${folders[@]}"; do
+    roots+=("\"src/$folder\"")
+  done
 else
-  # test specific module with exact full name to avoid issues with similar file names (busted uses Lua string.match where escaping is done with '%'')
-  TEST_FILE_PATTERN="^utest_${MODULE}%.lua$"
-  echo "P: $TEST_FILE_PATTERN"
-  MODULE_STR="module $MODULE"
+  roots=("src" "\"$picoboots_src_path/engine\"")
 fi
 
-# Define directories to test based on PROJECT
-ROOTS=""
-COVERAGE_DIRS=""
-
-if [[ $PROJECT = "engine" || $PROJECT = "all" ]] ; then
-  ROOTS+="$ENGINE_SRC"
-  COVERAGE_DIRS+="^$ENGINE_SRC/"
-fi
-
-if [[ $PROJECT = "game" || $PROJECT = "all" ]] ; then
-  ROOTS+=" src"
-  COVERAGE_DIRS+=" ^src/"  # match path from start to distinguish from $ENGINE_SRC/
-fi
-
-# Just for better log message
-if [[ $PROJECT = "all" ]] ; then
-  PROJECT_STR="all projects"
-else
-  PROJECT_STR="project '$PROJECT'"
-fi
-
-echo "Testing $MODULE_STR in $PROJECT_STR..."
-
-# Clean previous coverage
-CLEAN_COVERAGE_CMD="rm -f luacov.stats.out luacov.report.out"
-echo "> $CLEAN_COVERAGE_CMD"
-bash -c "$CLEAN_COVERAGE_CMD"
-
-# Run all unit tests
-LUA_PATH="src/?.lua;$ENGINE_SRC/?.lua"
-CORE_TEST_CMD="busted $ROOTS --lpath=\"$LUA_PATH\" -p \"$TEST_FILE_PATTERN\" -c -v"
-
-# Generate luacov report and display all uncovered lines (starting with *0) and coverage percentages
-COVERAGE_OPTIONS="-c .luacov $COVERAGE_DIRS"
-COVERAGE_CMD="luacov $COVERAGE_OPTIONS && echo $'\n\n= COVERAGE REPORT =\n' && grep -C 3 -P \"(?:(?:^|[ *])\*0|\d+%)\" luacov.report.out"
-
-TEST_WITH_COVERAGE_CMD="$CORE_TEST_CMD && $COVERAGE_CMD"
-echo "> $TEST_WITH_COVERAGE_CMD"
-bash -c "$TEST_WITH_COVERAGE_CMD"
+# Add extra lua root 'src' to enable require for game scripts
+"$picoboots_scripts_path/test_scripts.sh" ${roots[@]} --lua-root src $@

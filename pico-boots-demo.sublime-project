@@ -46,7 +46,7 @@
 			"name": "Game: test",
 			"working_dir": "${project_path}",
 			"shell": true,
-			"cmd": ["./test.sh $file_base_name"],
+			"cmd": ["./test.sh -f $file_base_name"],
 			// known limitation: last \n won't be detected in build output, so cannot display multi-line errors
 			"file_regex": "((?:pico-boots/src|src)\\/[-\\w\\/]+\\.lua)(?:\\:| @ )([\\d]+)(?:\\:)?([\\d]+)?\\n?(.*)",
 			"syntax": "Packages/Python/Python.sublime-syntax",
@@ -68,9 +68,9 @@
 		},
 		{
 			"name": "Engine: test",
-			"working_dir": "${project_path}/pico-boots",
+			"working_dir": "${project_path}",
 			"shell": true,
-			"cmd": ["./test.sh -f $file_base_name"],
+			"cmd": ["pico-boots/scripts/test_scripts.sh -f $file_base_name"],
 			// known limitation: last \n won't be detected in build output, so cannot display multi-line errors
 			"file_regex": "((?:pico-boots/src|src)\\/[-\\w\\/]+\\.lua)(?:\\:| @ )([\\d]+)(?:\\:)?([\\d]+)?\\n?(.*)",
 			"syntax": "Packages/Python/Python.sublime-syntax",
@@ -102,7 +102,7 @@
 				},
 				{
 					"name": "core",
-					"cmd": ["./test.sh core"]
+					"cmd": ["./test.sh src/engine/core"]
 				},
 				{
 					"name": "data",
