@@ -66,7 +66,7 @@
 			"name": "Engine: test",
 			"working_dir": "${project_path}",
 			"shell": true,
-			"cmd": ["pico-boots/scripts/test_scripts.sh -f $file_base_name"],
+			"cmd": ["pico-boots/test.sh -f $file_base_name"],
 			// known limitation: last \n won't be detected in build output, so cannot display multi-line errors
 			"file_regex": "((?:pico-boots/src|src)\\/[-\\w\\/]+\\.lua)(?:\\:| @ )([\\d]+)(?:\\:)?([\\d]+)?\\n?(.*)",
 			"syntax": "Packages/Python/Python.sublime-syntax",
@@ -74,23 +74,23 @@
 			[
 				{
 					"name": "(solo)",
-					"cmd": ["pico-boots/scripts/test_scripts.sh -f $file_base_name -m solo"]
+					"cmd": ["pico-boots/test.sh -f $file_base_name -m solo"]
 				},
 				{
 					"name": "(all)",
-					"cmd": ["pico-boots/scripts/test_scripts.sh -f $file_base_name -m all"]
+					"cmd": ["pico-boots/test.sh -f $file_base_name -m all"]
 				},
 				{
 					"name": "*",
-					"cmd": ["pico-boots/scripts/test_scripts.sh"]
+					"cmd": ["pico-boots/test.sh"]
 				},
 				{
 					"name": "* (solo)",
-					"cmd": ["pico-boots/scripts/test_scripts.sh -m solo"]
+					"cmd": ["pico-boots/test.sh -m solo"]
 				},
 				{
 					"name": "* (all)",
-					"cmd": ["pico-boots/scripts/test_scripts.sh -m all"]
+					"cmd": ["pico-boots/test.sh -m all"]
 				}
 			]
 		},
