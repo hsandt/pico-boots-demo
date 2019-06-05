@@ -1,5 +1,5 @@
 require("engine/test/bustedhelper")
-local h2 = require("game_helper2")
+local h2 = require("helper/game_helper2")
 
 describe('sub', function ()
   it('should return the difference of two numbers', function ()

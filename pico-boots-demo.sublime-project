@@ -53,16 +53,12 @@
 			"variants":
 			[
 				{
-					"name": "all",
+					"name": "*",
 					"cmd": ["./test.sh"],
 				},
 				{
-					"name": "engine",
-					"cmd": ["./test.sh -p engine"],
-				},
-				{
-					"name": "game",
-					"cmd": ["./test.sh -p game"],
+					"name": "helper",
+					"cmd": ["./test.sh helper"],
 				}
 			]
 		},
@@ -78,63 +74,23 @@
 			[
 				{
 					"name": "(solo)",
-					"cmd": ["./test.sh -f $file_base_name -m solo"]
+					"cmd": ["pico-boots/scripts/test_scripts.sh -f $file_base_name -m solo"]
 				},
 				{
 					"name": "(all)",
-					"cmd": ["./test.sh -f $file_base_name -m all"]
+					"cmd": ["pico-boots/scripts/test_scripts.sh -f $file_base_name -m all"]
 				},
 				{
 					"name": "*",
-					"cmd": ["./test.sh"]
+					"cmd": ["pico-boots/scripts/test_scripts.sh"]
 				},
 				{
 					"name": "* (solo)",
-					"cmd": ["./test.sh -m solo"]
+					"cmd": ["pico-boots/scripts/test_scripts.sh -m solo"]
 				},
 				{
 					"name": "* (all)",
-					"cmd": ["./test.sh -m all"]
-				},
-				{
-					"name": "application",
-					"cmd": ["./test.sh application"]
-				},
-				{
-					"name": "core",
-					"cmd": ["./test.sh src/engine/core"]
-				},
-				{
-					"name": "data",
-					"cmd": ["./test.sh data"]
-				},
-				{
-					"name": "debug",
-					"cmd": ["./test.sh debug"]
-				},
-				{
-					"name": "input",
-					"cmd": ["./test.sh input"]
-				},
-				{
-					"name": "physics",
-					"cmd": ["./test.sh physics"]
-				},
-				{
-					"name": "render",
-					"cmd": ["./test.sh render"]
-				},
-				{
-					"name": "test",
-					"cmd": ["./test.sh test"]
-				},
-				{
-					"name": "physics",
-					"cmd": ["./test.sh physics"]
-				},
-				{
-					"name": "ui",
-					"cmd": ["./test.sh ui"],
+					"cmd": ["pico-boots/scripts/test_scripts.sh -m all"]
 				}
 			]
 		},
@@ -161,6 +117,10 @@
 		"\\.lua$":
 		[
 			"PICO-8/PICO-8"
+		],
+		"\\.luacov":
+		[
+			"Lua/Lua"
 		]
 	}
 }

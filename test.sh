@@ -1,11 +1,12 @@
 #!/bin/bash
 
 # Configuration
-picoboots_src_path="$(dirname "$0")/pico-boots/src"
+game_src_path="$(dirname "$0")/src"
+game_config_path="$(dirname "$0")/config"
 picoboots_scripts_path="$(dirname "$0")/pico-boots/scripts"
 
 help() {
-  echo "Test game or pico-boots modules with busted
+  echo "Test game modules with busted
 
 This is essentially a proxy script for pico-boots/scripts/test_scripts.sh that avoids
 passing src/FOLDER every time we want to test a group of scripts in the game.
@@ -56,14 +57,15 @@ while [[ $# -gt 0 ]]; do
   esac
 done
 
-# Paths are relative to src/engine, so prepend it before passing to actual test script
 if [[ ${#folders[@]} -ne 0 ]]; then
+  # Paths are relative to game src, so prepend it before passing to actual test script
   for folder in "${folders[@]}"; do
-    roots+=("\"src/$folder\"")
+    roots+=("\"$game_src_path/$folder\"")
   done
 else
-  roots=("src" "\"$picoboots_src_path/engine\"")
+  # No folder passed, test the whole game folder
+  roots=("\"$game_src_path\"")
 fi
 
 # Add extra lua root 'src' to enable require for game scripts
-"$picoboots_scripts_path/test_scripts.sh" ${roots[@]} --lua-root src $@
+"$picoboots_scripts_path/test_scripts.sh" ${roots[@]} --lua-root src -c "$game_config_path/.luacov_game" $@

@@ -1,5 +1,5 @@
 require("engine/pico8/api")
-require("game_helper")
+require("helper/game_helper")
 
 local i = 0
 
