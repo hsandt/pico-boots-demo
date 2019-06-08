@@ -53,7 +53,7 @@ before_script:
 
 script:
   # test
-  - ./test.sh all
+  - ./test.sh -m all
   # coverage
   - bash <(curl -s https://codecov.io/bash)
   # build for deploy
