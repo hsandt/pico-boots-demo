@@ -132,7 +132,10 @@
 	{
 		"\\.lua$":
 		[
-			"PICO-8/PICO-8"
+			// use 1st line if using PICO-8 from Package Control,
+			// 2nd line if using version from GitHub (more features)
+			// PICO-8/PICO-8"
+			"sublime-PICO-8/PICO-8"
 		],
 		"\\.luacov":
 		[
