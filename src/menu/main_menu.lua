@@ -1,4 +1,6 @@
 local gamestate = require("engine/application/gamestate")
+local ui = require("engine/ui/ui")
+require("engine/render/color")
 
 -- main menu: gamestate for player navigating in main menu
 local main_menu = derived_class(gamestate)
@@ -12,7 +14,8 @@ function main_menu:update()
 end
 
 function main_menu:render()
-  api.print("main menu", 4*11, 6*12)
+  cls()
+  ui.print_centered("main menu", 64, 64, colors.white)
 end
 
 return main_menu
