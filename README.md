@@ -4,7 +4,8 @@ This project demonstrates the features of the [pico-boots framework for PICO-8](
 
 ## Development status
 
-The repository is currently a stub. It only contains the build/test pipeline and doesn't integrate pico-boots yet.
+* Flow + gamestate example in `main.lua` and `main_menu.lua`
+* UI helper example in `main_menu.lua`
 
 ## Build
 
@@ -24,7 +25,7 @@ Prebuild and postbuild scripts are written in Python 3 and use 3.6 features such
 
 A build pipeline for PICO-8 ([GitHub](https://github.com/dansanderson/picotool)).
 
-You must add p8tool to your `PATH`.
+You must add `p8tool` to your `PATH`.
 
 ### Build and run
 
@@ -50,7 +51,7 @@ A Lua unit test framework ([GitHub](https://github.com/Olivine-Labs/busted))
 
 ### Run unit tests and headless integration tests
 
-To run all the unit tests:
+To run all the (non-#mute) unit tests:
 
 * `cd path/to/pico-boots-demo`
 * `./test.sh`
