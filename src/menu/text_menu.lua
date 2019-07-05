@@ -52,7 +52,6 @@ function text_menu:draw(top)
   local y = top
 
   for item in all(self.items) do
-    print(item.label, screen_width / 2, y, colors.white)
     ui.print_centered(item.label, screen_width / 2, y, colors.white)
     y = y + character_height
   end
