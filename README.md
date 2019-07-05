@@ -55,3 +55,7 @@ To run all the (non-#mute) unit tests:
 
 * `cd path/to/pico-boots-demo`
 * `./test.sh`
+
+## Coding conventions
+
+Strings that are used as keys and are never shown to the user are written as `':key'` to imitate Ruby's symbol notation.
