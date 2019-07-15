@@ -54,7 +54,7 @@ function text_menu:draw(top)
   for i = 1, #self.items do
     -- for current selection, surround with "> <" like this: "> selected item <"
     local label = self.items[i].label
-    if i == self.current_selection then
+    if i == self.selection_index then
       label = "> "..label.." <"
     end
     ui.print_centered(label, screen_width / 2, y, colors.white)

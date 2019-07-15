@@ -164,7 +164,7 @@ describe('text_menu', function ()
       end)
 
       it('should print the item labels from a given top, on lines of 6px height, with current selection surrounded by "> <"', function ()
-        menu.current_selection = 2  -- credits
+        menu.selection_index = 2  -- credits
         menu:draw(48)
 
         local s = assert.spy(ui.print_centered)
