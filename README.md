@@ -2,10 +2,13 @@
 
 This project demonstrates the features of the [pico-boots framework for PICO-8](https://github.com/hsandt/pico-boots).
 
-## Development status
+You can both try the demos directly by running the game (see "Build and run" section) and read the corresponding source code.
 
-* Flow + gamestate example in `main.lua` and `main_menu.lua`
-* UI helper example in `main_menu.lua`
+## Demos
+
+* `main.lua` shows how to use the Flow system with gamestates. There is no specific demo for it, the whole app uses it, with 1 state for the main menu and 1 state per demo.
+* `main_menu.lua` shows how to make a simple menu using the UI and Input modules. You will see the main menu when starting the app.
+* `input_demo.lua` shows how to detect player input. In the main menu, select "INPUT DEMO", then press the different buttons (arrows and X/O in PICO-8) to see the input states change.
 
 ## Build
 

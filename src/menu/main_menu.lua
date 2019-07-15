@@ -14,8 +14,8 @@ main_menu.type = ':main_menu'
 
 -- sequence of menu items to display, with their target states
 main_menu._items = transform({
-    {"debug", ':debug_demo'},
-    {"input", ':input_demo'}
+    {"debug demo", ':debug_demo'},
+    {"input demo", ':input_demo'}
   }, unpacking(menu_item))
 
 -- text_menu: text_menu    component handling menu display and selection
