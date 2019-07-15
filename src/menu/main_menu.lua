@@ -1,7 +1,8 @@
 local gamestate = require("engine/application/gamestate")
+require("engine/core/class")
 local input = require("engine/input/input")
-local ui = require("engine/ui/ui")
 require("engine/render/color")
+local ui = require("engine/ui/ui")
 
 local menu_item = require("menu/menu_item")
 local text_menu = require("menu/text_menu")
@@ -9,12 +10,12 @@ local text_menu = require("menu/text_menu")
 -- main menu: gamestate for player navigating in main menu
 local main_menu = derived_class(gamestate)
 
-main_menu.type = "main_menu"
+main_menu.type = ':main_menu'
 
 -- sequence of menu items to display, with their target states
 main_menu._items = transform({
-    {"debug", ':debug'},
-    {"input", ':input'}
+    {"debug", ':debug_demo'},
+    {"input", ':input_demo'}
   }, unpacking(menu_item))
 
 -- text_menu: text_menu    component handling menu display and selection
