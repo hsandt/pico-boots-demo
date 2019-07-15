@@ -1,6 +1,7 @@
 require("engine/pico8/api")
 
 local flow = require("engine/application/flow")
+local input = require("engine/input/input")
 
 local main_menu = require("menu/main_menu")
 
@@ -12,6 +13,7 @@ function _init()
 end
 
 function _update60()
+  input:process_players_inputs()
   flow:update()
 end
 
