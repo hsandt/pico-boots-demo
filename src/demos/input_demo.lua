@@ -24,19 +24,22 @@ end
 function input_demo:render()
   cls()
 
-  local y = 6
   -- todo: use vertical_layout
-  api.print("left: "..input.players_btn_states[0][button_ids.left], 10, y, colors.white)
+  local y = 6
+  ui.print_centered("input demo", 64, y, colors.white)
+  y = y + 12
+
+  api.print("left: "..input:get_button_state(button_ids.left, 0), 10, y, colors.white)
   y = y + 6
-  api.print("right: "..input.players_btn_states[0][button_ids.right], 10, y, colors.white)
+  api.print("right: "..input:get_button_state(button_ids.right, 0), 10, y, colors.white)
   y = y + 6
-  api.print("up: "..input.players_btn_states[0][button_ids.up], 10, y, colors.white)
+  api.print("up: "..input:get_button_state(button_ids.up, 0), 10, y, colors.white)
   y = y + 6
-  api.print("down: "..input.players_btn_states[0][button_ids.down], 10, y, colors.white)
+  api.print("down: "..input:get_button_state(button_ids.down, 0), 10, y, colors.white)
   y = y + 6
-  api.print("o: "..input.players_btn_states[0][button_ids.o], 10, y, colors.white)
+  api.print("o: "..input:get_button_state(button_ids.o, 0), 10, y, colors.white)
   y = y + 6
-  api.print("x: "..input.players_btn_states[0][button_ids.x], 10, y, colors.white)
+  api.print("x: "..input:get_button_state(button_ids.x, 0), 10, y, colors.white)
 end
 
 return input_demo
