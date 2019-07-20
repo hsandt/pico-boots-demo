@@ -1,26 +1,20 @@
+-- main entry file that uses the gameapp module for a quick bootstrap
+-- the gameapp is also useful for integration tests
+
+-- must require in main
 require("engine/pico8/api")
 
-local flow = require("engine/application/flow")
-local input = require("engine/input/input")
-
-local main_menu = require("menu/main_menu")
-local debug_demo = require("demos/debug_demo")
-local input_demo = require("demos/input_demo")
-
-local i = 0
+local demo_app = require("application/demo_app")
 
 function _init()
-  flow:add_gamestate(main_menu())
-  flow:add_gamestate(debug_demo())
-  flow:add_gamestate(input_demo())
-  flow:query_gamestate_type(main_menu.type)
+  demo_app.initial_gamestate = ':main_menu'
+  demo_app:start()
 end
 
 function _update60()
-  input:process_players_inputs()
-  flow:update()
+  demo_app:update()
 end
 
 function _draw()
-  flow:render()
+  demo_app:draw()
 end

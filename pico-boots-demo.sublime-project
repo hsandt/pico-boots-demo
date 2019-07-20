@@ -37,7 +37,14 @@
 			"shell": true,
 			"cmd": ["./build.sh && ./run.sh"],
 			"file_regex": "(.*\\.sh)(?:\\: line )([\\d]+)(?:\\:)([\\d]+)? (.*)",
-			"syntax": "Packages/Python/Python.sublime-syntax"
+			"syntax": "Packages/Python/Python.sublime-syntax",
+			"variants":
+			[
+				{
+					"name": "(main_with_flow)",
+					"cmd": ["./build_main_with_flow.sh && ./run.sh"],
+				}
+			]
 		},
 		{
 			"name": "Game: run",
