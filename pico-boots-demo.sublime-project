@@ -5,7 +5,8 @@
 			"path": ".",
 			"folder_exclude_patterns":
 			[
-				"build"
+				"build",
+				"intermediate"
 			]
 		}
 	],
@@ -24,10 +25,18 @@
 			"working_dir": "${project_path}"
 		},
 		{
-			"name": "Game: build",
+			"name": "Game: build game",
 			"working_dir": "${project_path}",
 			"shell": true,
-			"cmd": ["./build.sh"],
+			"cmd": ["./build_game.sh"],
+			"file_regex": "(.*\\.sh)(?:\\: line )([\\d]+)(?:\\:)([\\d]+)? (.*)",
+			"syntax": "Packages/Python/Python.sublime-syntax"
+		},
+		{
+			"name": "Game: build itests",
+			"working_dir": "${project_path}",
+			"shell": true,
+			"cmd": ["./build_itest.sh"],
 			"file_regex": "(.*\\.sh)(?:\\: line )([\\d]+)(?:\\:)([\\d]+)? (.*)",
 			"syntax": "Packages/Python/Python.sublime-syntax"
 		},
@@ -35,14 +44,14 @@
 			"name": "Game: build and run",
 			"working_dir": "${project_path}",
 			"shell": true,
-			"cmd": ["./build.sh && ./run.sh"],
+			"cmd": ["./build_game.sh && ./run_game.sh"],
 			"file_regex": "(.*\\.sh)(?:\\: line )([\\d]+)(?:\\:)([\\d]+)? (.*)",
 			"syntax": "Packages/Python/Python.sublime-syntax",
 			"variants":
 			[
 				{
 					"name": "(main_with_flow)",
-					"cmd": ["./build_main_with_flow.sh && ./run.sh"],
+					"cmd": ["./build_main_with_flow.sh && ./run_game.sh"],
 				}
 			]
 		},
@@ -50,7 +59,7 @@
 			"name": "Game: run",
 			"working_dir": "${project_path}",
 			"shell": true,
-			"cmd": ["./run.sh"],
+			"cmd": ["./run_game.sh"],
 			"syntax": "Packages/Python/Python.sublime-syntax"
 		},
 		{
@@ -86,6 +95,22 @@
 				{
 					"name": "helper",
 					"cmd": ["./test.sh helper"],
+				},
+				{
+					"name": "all_itests_headless",
+					"cmd": ["./test.sh -f all_itests_headless"],
+				},
+				{
+					"name": "all_itests_headless (render)",
+					"cmd": ["./test.sh -f all_itests_headless --render"],
+				},
+				{
+					"name": "all_itests_headless - solo",
+					"cmd": ["./test.sh -f all_itests_headless -m solo"],
+				},
+				{
+					"name": "all_itests_headless - solo (render)",
+					"cmd": ["./test.sh -f all_itests_headless -m solo --render"],
 				}
 			]
 		},
@@ -135,9 +160,25 @@
 			"working_dir": "${project_path}/pico-boots",
 			"shell": true,
 			"cmd": ["python3 -m scripts.test_add_metadata"],
-			"file_regex": "\"(.*\\.py)\"(?:, line )([\\d]+)(?:\\:)?([\\d]+)?, (.*)",
+			"file_regex": "\"(.*\\.py)\"(?:, line )([\\d]+)(?:\\:)?([\\d]+)?(.*)",
 			"syntax": "Packages/Python/Python.sublime-syntax"
-		}
+		},
+		{
+			"name": "Postbuild: test add_require",
+			"working_dir": "${project_path}/pico-boots",
+			"shell": true,
+			"cmd": ["python3 -m scripts.test_add_require"],
+			"file_regex": "\"(.*\\.py)\"(?:, line )([\\d]+)(?:\\:)?([\\d]+)?(.*)",
+			"syntax": "Packages/Python/Python.sublime-syntax"
+		},
+		{
+			"name": "Postbuild: test minify",
+			"working_dir": "${project_path}/pico-boots",
+			"shell": true,
+			"cmd": ["python3 -m scripts.test_minify"],
+			"file_regex": "\"(.*\\.py)\"(?:, line )([\\d]+)(?:\\:)?([\\d]+)?(.*)",
+			"syntax": "Packages/Python/Python.sublime-syntax"
+		},
 	],
 	"syntax_override":
 	{
