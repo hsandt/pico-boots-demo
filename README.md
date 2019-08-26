@@ -20,15 +20,7 @@ Development environments for Windows such as MinGW and Cygwin have not been test
 
 ### Build dependencies
 
-#### Python 3.6
-
-Prebuild and postbuild scripts are written in Python 3 and use 3.6 features such as formatted strings.
-
-#### picotool
-
-A build pipeline for PICO-8 ([GitHub](https://github.com/dansanderson/picotool)).
-
-You must add `p8tool` to your `PATH`.
+See Build dependencies in [pico-boots](https://github.com/hsandt/pico-boots) README.
 
 ### Build and run
 
@@ -42,15 +34,7 @@ The most straightforward way to build and run the game on Unix platforms is:
 
 ### Test dependencies
 
-#### Lua 5.3
-
-Tests run under Lua 5.3, although Lua 5.2 should also have the needed features (in particular the bit32 module).
-
-#### busted
-
-A Lua unit test framework ([GitHub](https://github.com/Olivine-Labs/busted))
-
-`busted` must be in your path.
+See Test dependencies in [pico-boots](https://github.com/hsandt/pico-boots) README.
 
 ### Run unit tests and headless integration tests
 
