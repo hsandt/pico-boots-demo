@@ -56,5 +56,6 @@ script:
   - ./test.sh -m all
   # coverage
   - bash <(curl -s https://codecov.io/bash)
-  # build for deploy
-  - ./build.sh
+  # build game and itest to make sure everything works fine
+  - ./build_game.sh
+  - ./build_itest.sh
