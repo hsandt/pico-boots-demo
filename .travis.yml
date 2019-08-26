@@ -36,6 +36,9 @@ install:
   - luarocks install busted
   - luarocks install luacov
 
+  # delegate submodule install (for luamin from npm)
+  - pico-boots/setup.sh
+
 before_script:
   # download picotool if needed
   # tool directory is automatically created when added to cache,
