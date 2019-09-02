@@ -68,4 +68,5 @@ else
 fi
 
 # Add extra lua root 'src' to enable require for game scripts
+# todo: use .luacov_engine when testing engine source only
 "$picoboots_scripts_path/test_scripts.sh" ${roots[@]} --lua-root src -c "$game_config_path/.luacov_game" $@

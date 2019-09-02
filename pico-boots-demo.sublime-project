@@ -97,20 +97,20 @@
 					"cmd": ["./test.sh helper"],
 				},
 				{
-					"name": "all_itests_headless",
-					"cmd": ["./test.sh -f all_itests_headless"],
+					"name": "headless_itests",
+					"cmd": ["./test.sh -f headless_itests"],
 				},
 				{
-					"name": "all_itests_headless (render)",
-					"cmd": ["./test.sh -f all_itests_headless -- --render"],
+					"name": "headless_itests (render)",
+					"cmd": ["./test.sh -f headless_itests -- --render"],
 				},
 				{
-					"name": "all_itests_headless - solo",
-					"cmd": ["./test.sh -f all_itests_headless -m solo"],
+					"name": "headless_itests - solo",
+					"cmd": ["./test.sh -f headless_itests -m solo"],
 				},
 				{
-					"name": "all_itests_headless - solo (render)",
-					"cmd": ["./test.sh -f all_itests_headless -m solo -- --render"],
+					"name": "headless_itests - solo (render)",
+					"cmd": ["./test.sh -f headless_itests -m solo -- --render"],
 				}
 			]
 		},
