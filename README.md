@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.org/hsandt/pico-boots-demo.svg?branch=master)](https://travis-ci.org/hsandt/pico-boots-demo)
+[![codecov](https://codecov.io/gh/hsandt/pico-boots-demo/branch/master/graph/badge.svg)](https://codecov.io/gh/hsandt/pico-boots-demo)
+
 # pico-boots demo
 
 This project demonstrates the features of the [pico-boots framework for PICO-8](https://github.com/hsandt/pico-boots).
