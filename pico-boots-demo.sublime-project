@@ -102,7 +102,7 @@
 				},
 				{
 					"name": "all_itests_headless (render)",
-					"cmd": ["./test.sh -f all_itests_headless --render"],
+					"cmd": ["./test.sh -f all_itests_headless -- --render"],
 				},
 				{
 					"name": "all_itests_headless - solo",
@@ -110,7 +110,7 @@
 				},
 				{
 					"name": "all_itests_headless - solo (render)",
-					"cmd": ["./test.sh -f all_itests_headless -m solo --render"],
+					"cmd": ["./test.sh -f all_itests_headless -m solo -- --render"],
 				}
 			]
 		},
