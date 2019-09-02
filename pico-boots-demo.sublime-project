@@ -52,6 +52,10 @@
 				{
 					"name": "(main_with_flow)",
 					"cmd": ["./build_main_with_flow.sh && ./run_game.sh"],
+				},
+				{
+					"name": "itests",
+					"cmd": ["./build_itest.sh && ./run_itest.sh"],
 				}
 			]
 		},
