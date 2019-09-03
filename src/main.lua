@@ -12,6 +12,9 @@ function _init()
   -- register console log stream to output logs to the console
   logging.logger:register_stream(logging.console_log_stream)
 
+  -- enable mouse devkit
+  input:toggle_mouse(true)
+
   demo_app.initial_gamestate = ':main_menu'
   demo_app:start()
 end
