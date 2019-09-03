@@ -1,7 +1,11 @@
 -- main entry file that uses flow module interface directly to make update a gamestate FSM
 
--- must require in main
+-- must require at main top, to be used in any required modules from here
 require("engine/pico8/api")
+
+-- register console log stream to output logs to the console
+local logging = require("engine/debug/logging")
+logging.logger:register_stream(logging.console_log_stream)
 
 local flow = require("engine/application/flow")
 local input = require("engine/input/input")

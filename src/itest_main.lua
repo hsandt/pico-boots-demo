@@ -1,13 +1,15 @@
 -- main source file for all itests, used to run itests in pico8
 
--- must require in main
+-- must require at main top, to be used in any required modules from here
 require("engine/pico8/api")
 
 require("engine/test/integrationtest")
 local demo_app = require("application/demo_app")
+-- tag to add require for itest files here
 --[[add_require]]
 
 --#if log
+-- register log streams to output logs to both the console and the file log
 local logging = require("engine/debug/logging")
 logging.logger:register_stream(logging.console_log_stream)
 logging.logger:register_stream(logging.file_log_stream)

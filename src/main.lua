@@ -1,8 +1,12 @@
 -- main entry file that uses the gameapp module for a quick bootstrap
 -- the gameapp is also useful for integration tests
 
--- must require in main
+-- must require at main top, to be used in any required modules from here
 require("engine/pico8/api")
+
+-- register console log stream to output logs to the console
+local logging = require("engine/debug/logging")
+logging.logger:register_stream(logging.console_log_stream)
 
 local demo_app = require("application/demo_app")
 
