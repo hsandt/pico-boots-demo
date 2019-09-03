@@ -9,16 +9,17 @@ local demo_app = require("application/demo_app")
 --[[add_require]]
 
 --#if log
--- register log streams to output logs to both the console and the file log
 local logging = require("engine/debug/logging")
-logging.logger:register_stream(logging.console_log_stream)
-logging.logger:register_stream(logging.file_log_stream)
 --#endif
 
 local current_itest_index = 0
 
 function _init()
 --#if log
+  -- register log streams to output logs to both the console and the file log
+  logging.logger:register_stream(logging.console_log_stream)
+  logging.logger:register_stream(logging.file_log_stream)
+
   -- clear log file on new itest session
   logging.file_log_stream:clear()
 --#endif
