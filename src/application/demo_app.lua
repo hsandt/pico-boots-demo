@@ -3,6 +3,7 @@
 
 local gameapp = require("engine/application/gameapp")
 require("engine/core/class")
+local input = require("engine/input/input")
 local ui = require("engine/ui/ui")
 
 local main_menu = require("menu/main_menu")
@@ -17,6 +18,8 @@ function demo_app.instantiate_gamestates() -- override
 end
 
 function demo_app.on_start() -- override
+  -- enable mouse devkit
+  input:toggle_mouse(true)
   ui:set_cursor_sprite_data(visual.sprites.cursor)
 end
 
