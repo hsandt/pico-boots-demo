@@ -7,6 +7,12 @@ local ui = require("engine/ui/ui")
 
 describe('input_demo', function ()
 
+  local input_demo_state
+
+  before_each(function ()
+    input_demo_state = input_demo()
+  end)
+
   describe('render', function ()
 
     setup(function ()
@@ -28,13 +34,13 @@ describe('input_demo', function ()
     end)
 
     it('should clear screen', function ()
-      input_demo:render()
+      input_demo_state:render()
 
       assert.spy(cls).was_called(1)
     end)
 
     it('should print the demo title', function ()
-      input_demo:render()
+      input_demo_state:render()
 
       local s = assert.spy(ui.print_centered)
       s.was_called(1)
@@ -51,7 +57,7 @@ describe('input_demo', function ()
         [button_ids.x] = btn_states.just_pressed
       }
 
-      input_demo:render()
+      input_demo_state:render()
 
       local s = assert.spy(api.print)
       s.was_called(6)
