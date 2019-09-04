@@ -51,7 +51,7 @@
 			[
 				{
 					"name": "(main_with_flow)",
-					"cmd": ["./build_main_with_flow.sh && ./run_game.sh"],
+					"cmd": ["./build_main_with_flow.sh && ./run_game_with_flow.sh"],
 				},
 				{
 					"name": "itests",
