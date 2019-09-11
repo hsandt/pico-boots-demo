@@ -120,33 +120,33 @@
 		},
 		{
 			"name": "Engine: test",
-			"working_dir": "${project_path}",
+			"working_dir": "${project_path}/pico-boots",
 			"shell": true,
-			"cmd": ["pico-boots/test.sh -f $file_base_name"],
+			"cmd": ["./test.sh -f $file_base_name"],
 			// known limitation: last \n won't be detected in build output, so cannot display multi-line errors
-			"file_regex": "((?:pico-boots/src|src)\\/[-\\w\\/]+\\.lua)(?:\\:| @ )([\\d]+)(?:\\:)?([\\d]+)?\\n?(.*)",
+			"file_regex": "((?:src)\\/[-\\w\\/]+\\.lua)(?:\\:| @ )([\\d]+)(?:\\:)?([\\d]+)?\\n?(.*)",
 			"syntax": "Packages/Python/Python.sublime-syntax",
 			"variants":
 			[
 				{
 					"name": "(solo)",
-					"cmd": ["pico-boots/test.sh -f $file_base_name -m solo"]
+					"cmd": ["./test.sh -f $file_base_name -m solo"]
 				},
 				{
 					"name": "(all)",
-					"cmd": ["pico-boots/test.sh -f $file_base_name -m all"]
+					"cmd": ["./test.sh -f $file_base_name -m all"]
 				},
 				{
 					"name": "*",
-					"cmd": ["pico-boots/test.sh"]
+					"cmd": ["./test.sh"]
 				},
 				{
 					"name": "* (solo)",
-					"cmd": ["pico-boots/test.sh -m solo"]
+					"cmd": ["./test.sh -m solo"]
 				},
 				{
 					"name": "* (all)",
-					"cmd": ["pico-boots/test.sh -m all"]
+					"cmd": ["./test.sh -m all"]
 				}
 			]
 		},
@@ -154,6 +154,7 @@
 			"name": "All: test",
 			"working_dir": "${project_path}",
 			"shell": true,
+			// note that luacov report is generated in the working directory, so the second test report will overwrite the previous one
 			"cmd": ["./test.sh && echo '' && pico-boots/test.sh"],
 			// known limitation: last \n won't be detected in build output, so cannot display multi-line errors
 			"file_regex": "((?:pico-boots/src|src)\\/[-\\w\\/]+\\.lua)(?:\\:| @ )([\\d]+)(?:\\:)?([\\d]+)?\\n?(.*)",
