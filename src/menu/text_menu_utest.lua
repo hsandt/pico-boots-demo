@@ -53,7 +53,7 @@ describe('text_menu', function ()
         text_menu.confirm_selection:clear()
       end)
 
-      it('(when input up in down) it should move cursor up', function ()
+      it('(when input up is down) it should move cursor up', function ()
         input.players_btn_states[0][button_ids.up] = btn_states.just_pressed
 
         menu:update()
@@ -63,7 +63,7 @@ describe('text_menu', function ()
         s.was_called_with(match.ref(menu))
       end)
 
-      it('(when input down in down) it should move cursor down', function ()
+      it('(when input down is down) it should move cursor down', function ()
         input.players_btn_states[0][button_ids.down] = btn_states.just_pressed
 
         menu:update()
@@ -73,7 +73,7 @@ describe('text_menu', function ()
         s.was_called_with(match.ref(menu))
       end)
 
-      it('(when input o in down) it should move cursor o', function ()
+      it('(when input o is down) it should confirm selection', function ()
         input.players_btn_states[0][button_ids.o] = btn_states.just_pressed
 
         menu:update()
@@ -141,7 +141,7 @@ describe('text_menu', function ()
           flow.query_gamestate_type:revert()
         end)
 
-        it('should not change selection index due to clamping', function ()
+        it('should enter the credits state', function ()
           menu:confirm_selection()
 
           local s = assert.spy(flow.query_gamestate_type)
