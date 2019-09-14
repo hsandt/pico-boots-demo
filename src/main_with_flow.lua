@@ -4,8 +4,8 @@
 require("engine/pico8/api")
 
 local logging = require("engine/debug/logging")
-
 local flow = require("engine/application/flow")
+local vlogger = require("engine/debug/visual_logger")
 local input = require("engine/input/input")
 local ui = require("engine/ui/ui")
 
@@ -19,6 +19,7 @@ function _init()
   logging.logger:register_stream(logging.console_log_stream)
   logging.logger:register_stream(logging.file_log_stream)
   logging.file_log_stream.file_prefix = "pico_boots_demo_with_flow"
+  logging.logger:register_stream(vlogger.vlog_stream)
 
   -- clear log file on new game session (or to preserve the previous log,
   -- you could add a newline and some "[SESSION START]" tag instead)
@@ -37,9 +38,15 @@ end
 function _update60()
   input:process_players_inputs()
   flow:update()
+
+  profiler.window:update()
+  vlogger.window:update()
 end
 
 function _draw()
   flow:render()
   ui:render_mouse()
+
+  profiler.window:render()
+  vlogger.window:render()
 end

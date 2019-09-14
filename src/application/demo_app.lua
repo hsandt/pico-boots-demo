@@ -4,6 +4,8 @@
 local gameapp = require("engine/application/gameapp")
 require("engine/core/class")
 local logging = require("engine/debug/logging")
+local profiler = require("engine/debug/profiler")
+local vlogger = require("engine/debug/visual_logger")
 local input = require("engine/input/input")
 local ui = require("engine/ui/ui")
 
@@ -24,6 +26,7 @@ function demo_app.on_pre_start() -- override
   logging.logger:register_stream(logging.console_log_stream)
   logging.logger:register_stream(logging.file_log_stream)
   logging.file_log_stream.file_prefix = "pico_boots_demo"
+  logging.logger:register_stream(vlogger.vlog_stream)
 
   -- clear log file on new game session (or to preserve the previous log,
   -- you could add a newline and some "[SESSION START]" tag instead)
@@ -40,8 +43,16 @@ function demo_app.on_reset() -- override
   ui:set_cursor_sprite_data(nil)
 end
 
+function demo_app.on_update() -- override
+  profiler.window:update()
+  vlogger.window:update()
+end
+
 function demo_app:on_render() -- override
   ui:render_mouse()
+
+  profiler.window:render()
+  vlogger.window:render()
 end
 
 return demo_app
