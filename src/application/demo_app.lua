@@ -27,6 +27,9 @@ function demo_app.on_pre_start() -- override
   logging.logger:register_stream(logging.file_log_stream)
   logging.file_log_stream.file_prefix = "pico_boots_demo"
   logging.logger:register_stream(vlogger.vlog_stream)
+  -- start inactive (important to avoid uninitialized _msg_queue error
+  --  when logging before calling set_vlogger_active in debug_demo)
+  vlogger.vlog_stream.active = false
 
   -- clear log file on new game session (or to preserve the previous log,
   -- you could add a newline and some "[SESSION START]" tag instead)
