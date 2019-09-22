@@ -21,11 +21,11 @@ describe('input_demo', function ()
     end)
 
     teardown(function ()
-      input_demo_state._go_back:revert()
+      input_demo._go_back:revert()
     end)
 
     after_each(function ()
-      input_demo_state._go_back:clear()
+      input_demo._go_back:clear()
     end)
 
     it('(when no input is down) it should not call _go_back', function ()
@@ -35,15 +35,28 @@ describe('input_demo', function ()
       s.was_not_called()
     end)
 
-    it('(when input left is down and x just pressed) it should call _go_back', function ()
-      input.players_btn_states[0][button_ids.left] = btn_states.pressed
-      input.players_btn_states[0][button_ids.x] = btn_states.just_pressed
+    describe('(when input left is down and x just pressed)', function ()
 
-      input_demo_state:update()
+      setup(function ()
+        input.players_btn_states[0][button_ids.left] = btn_states.pressed
+        input.players_btn_states[0][button_ids.x] = btn_states.just_pressed
+      end)
 
-      local s = assert.spy(input_demo_state._go_back)
-      s.was_called(1)
-      s.was_called_with(match.ref(input_demo_state))
+      teardown(function ()
+        input:init()
+      end)
+
+      it('it should call _go_back', function ()
+        input.players_btn_states[0][button_ids.left] = btn_states.pressed
+        input.players_btn_states[0][button_ids.x] = btn_states.just_pressed
+
+        input_demo_state:update()
+
+        local s = assert.spy(input_demo_state._go_back)
+        s.was_called(1)
+        s.was_called_with(match.ref(input_demo_state))
+      end)
+
     end)
 
   end)
@@ -103,30 +116,59 @@ describe('input_demo', function ()
       s.was_called_with("(hold left + x: back to main menu)", 64, 12, colors.white)
     end)
 
-    it('should print the current state of each button (with explanation)', function ()
-      input.players_btn_states[0] = {
-        [button_ids.left] = btn_states.released,
-        [button_ids.right] = btn_states.just_pressed,
-        [button_ids.up] = btn_states.pressed,
-        [button_ids.down] = btn_states.just_released,
-        [button_ids.o] = btn_states.released,
-        [button_ids.x] = btn_states.just_pressed
-      }
+    describe('(with some inputs for both players)', function ()
 
-      input_demo_state:render()
+      setup(function ()
+        input.players_btn_states = {
+          [0] = {
+            [button_ids.left] = btn_states.released,
+            [button_ids.right] = btn_states.just_pressed,
+            [button_ids.up] = btn_states.pressed,
+            [button_ids.down] = btn_states.just_released,
+            [button_ids.o] = btn_states.released,
+            [button_ids.x] = btn_states.just_pressed
+          },
+          [1] = {
+            [button_ids.left] = btn_states.just_pressed,
+            [button_ids.right] = btn_states.released,
+            [button_ids.up] = btn_states.just_released,
+            [button_ids.down] = btn_states.just_released,
+            [button_ids.o] = btn_states.pressed,
+            [button_ids.x] = btn_states.just_released
+          }
+        }
+      end)
 
-      local s = assert.spy(api.print)
-      s.was_called(8)
+      teardown(function ()
+        input:init()
+      end)
 
-      s.was_called_with("0: released  1: just pressed", 6, 24, colors.white)
-      s.was_called_with("2: pressed   3: just released", 6, 30, colors.white)
+      it('should print the current state of each button (with explanation)', function ()
+        input_demo_state:render()
 
-      s.was_called_with("left: 0", 10, 42, colors.white)
-      s.was_called_with("right: 1", 10, 48, colors.white)
-      s.was_called_with("up: 2", 10, 54, colors.white)
-      s.was_called_with("down: 3", 10, 60, colors.white)
-      s.was_called_with("o: 0", 10, 66, colors.white)
-      s.was_called_with("x: 1", 10, 72, colors.white)
+        local s = assert.spy(api.print)
+        s.was_called(16)
+
+        s.was_called_with("0: released  1: just pressed", 6, 24, colors.white)
+        s.was_called_with("2: pressed   3: just released", 6, 30, colors.white)
+
+        s.was_called_with("player 1", 20, 42, colors.white)
+        s.was_called_with("left: 0", 20, 52, colors.white)
+        s.was_called_with("right: 1", 20, 58, colors.white)
+        s.was_called_with("up: 2", 20, 64, colors.white)
+        s.was_called_with("down: 3", 20, 70, colors.white)
+        s.was_called_with("o: 0", 20, 76, colors.white)
+        s.was_called_with("x: 1", 20, 82, colors.white)
+
+        s.was_called_with("player 2", 74, 42, colors.white)
+        s.was_called_with("left: 1", 74, 52, colors.white)
+        s.was_called_with("right: 0", 74, 58, colors.white)
+        s.was_called_with("up: 3", 74, 64, colors.white)
+        s.was_called_with("down: 3", 74, 70, colors.white)
+        s.was_called_with("o: 2", 74, 76, colors.white)
+        s.was_called_with("x: 3", 74, 82, colors.white)
+      end)
+
     end)
 
   end)
