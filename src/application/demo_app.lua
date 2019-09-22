@@ -52,10 +52,11 @@ function demo_app.on_update() -- override
 end
 
 function demo_app:on_render() -- override
-  ui:render_mouse()
-
   profiler.window:render()
   vlogger.window:render()
+
+  -- always draw cursor on top
+  ui:render_mouse()
 end
 
 return demo_app
