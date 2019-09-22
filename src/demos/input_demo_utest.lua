@@ -103,7 +103,7 @@ describe('input_demo', function ()
       s.was_called_with("(hold left + x: back to main menu)", 64, 12, colors.white)
     end)
 
-    it('should print the current state of each button', function ()
+    it('should print the current state of each button (with explanation)', function ()
       input.players_btn_states[0] = {
         [button_ids.left] = btn_states.released,
         [button_ids.right] = btn_states.just_pressed,
@@ -116,13 +116,17 @@ describe('input_demo', function ()
       input_demo_state:render()
 
       local s = assert.spy(api.print)
-      s.was_called(6)
-      s.was_called_with("left: 0", 10, 24, colors.white)
-      s.was_called_with("right: 1", 10, 30, colors.white)
-      s.was_called_with("up: 2", 10, 36, colors.white)
-      s.was_called_with("down: 3", 10, 42, colors.white)
-      s.was_called_with("o: 0", 10, 48, colors.white)
-      s.was_called_with("x: 1", 10, 54, colors.white)
+      s.was_called(8)
+
+      s.was_called_with("0: released  1: just pressed", 6, 24, colors.white)
+      s.was_called_with("2: pressed   3: just released", 6, 30, colors.white)
+
+      s.was_called_with("left: 0", 10, 42, colors.white)
+      s.was_called_with("right: 1", 10, 48, colors.white)
+      s.was_called_with("up: 2", 10, 54, colors.white)
+      s.was_called_with("down: 3", 10, 60, colors.white)
+      s.was_called_with("o: 0", 10, 66, colors.white)
+      s.was_called_with("x: 1", 10, 72, colors.white)
     end)
 
   end)

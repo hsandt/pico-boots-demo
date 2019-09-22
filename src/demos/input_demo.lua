@@ -39,6 +39,10 @@ function input_demo:render()
   y = y + 6
   ui.print_centered("(hold left + x: back to main menu)", 64, y, colors.white)
   y = y + 12
+  api.print("0: released  1: just pressed", 6, y, colors.white)
+  y = y + 6
+  api.print("2: pressed   3: just released", 6, y, colors.white)
+  y = y + 12
 
   api.print("left: "..input:get_button_state(button_ids.left, 0), 10, y, colors.white)
   y = y + 6
