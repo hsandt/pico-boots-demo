@@ -22,10 +22,10 @@ describe('debug_demo', function ()
       assert.are_equal(wtk.gui_root, getmetatable(debug_demo_state.gui))
     end)
 
-    it('should add a vertical layout with 10 elements to the gui root', function ()
+    it('should add a vertical layout with 11 elements to the gui root', function ()
       assert.are_equal(wtk.vertical_layout, getmetatable(debug_demo_state.v_layout))
       assert.are_equal(debug_demo_state.v_layout, debug_demo_state.gui.children[1])
-      assert.are_equal(10, #debug_demo_state.v_layout.children)
+      assert.are_equal(11, #debug_demo_state.v_layout.children)
       -- we don't detail the elements further, as it would mostly be testing data
     end)
 
@@ -111,17 +111,30 @@ describe('debug_demo', function ()
     setup(function ()
       stub(_G, "cls")
       stub(ui, "print_centered")
-
+      -- spy gui_root.draw, but also stub to avoid
+      --  having indirect rectfill calls making it hard to count them 
+      stub(wtk.gui_root, "draw")
+      stub(_G, "tuned", function (name, default_value)
+        -- simulate the user having modified the tuned values a bit
+        return default_value + 10
+      end)
+      stub(_G, "rectfill")
     end)
 
     teardown(function ()
       cls:revert()
       ui.print_centered:revert()
+      wtk.gui_root.draw:revert()
+      tuned:revert()
+      rectfill:revert()
     end)
 
     after_each(function ()
       cls:clear()
       ui.print_centered:clear()
+      wtk.gui_root.draw:clear()
+      tuned:clear()
+      rectfill:clear()
     end)
 
     it('should clear screen', function ()
@@ -137,6 +150,23 @@ describe('debug_demo', function ()
       s.was_called(2)
       s.was_called_with("debug demo", 64, 6, colors.white)
       s.was_called_with("(x: back to main menu)", 64, 12, colors.white)
+    end)
+
+    it('should draw the gui', function ()
+      debug_demo_state:render()
+
+      local s = assert.spy(debug_demo_state.gui.draw)
+      s.was_called(1)
+      s.was_called_with(match.ref(debug_demo_state.gui))
+    end)
+
+    it('should draw a yellow rectangle to demonstrate codetuner', function ()
+      debug_demo_state:render()
+
+      local s = assert.spy(rectfill)
+      s.was_called(1)
+      -- take simulated tuning of +10 into account
+      s.was_called_with(74, 126, 82, 134, colors.yellow)
     end)
 
   end)

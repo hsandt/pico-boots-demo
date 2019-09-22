@@ -3,6 +3,7 @@
 
 local gameapp = require("engine/application/gameapp")
 require("engine/core/class")
+local codetuner = require("engine/debug/codetuner")
 local logging = require("engine/debug/logging")
 local profiler = require("engine/debug/profiler")
 local vlogger = require("engine/debug/visual_logger")
@@ -49,11 +50,13 @@ end
 function demo_app.on_update() -- override
   profiler.window:update()
   vlogger.window:update()
+  codetuner:update_window()
 end
 
 function demo_app:on_render() -- override
   profiler.window:render()
   vlogger.window:render()
+  codetuner:render_window()
 
   -- always draw cursor on top
   ui:render_mouse()

@@ -3,8 +3,10 @@
 -- must require at main top, to be used in any required modules from here
 require("engine/pico8/api")
 
-local logging = require("engine/debug/logging")
 local flow = require("engine/application/flow")
+local codetuner = require("engine/debug/codetuner")
+local logging = require("engine/debug/logging")
+local profiler = require("engine/debug/profiler")
 local vlogger = require("engine/debug/visual_logger")
 local input = require("engine/input/input")
 local ui = require("engine/ui/ui")
@@ -41,12 +43,16 @@ function _update60()
 
   profiler.window:update()
   vlogger.window:update()
+  codetuner:update_window()
 end
 
 function _draw()
   flow:render()
-  ui:render_mouse()
 
   profiler.window:render()
   vlogger.window:render()
+  codetuner:render_window()
+
+  -- always draw cursor on top
+  ui:render_mouse()
 end

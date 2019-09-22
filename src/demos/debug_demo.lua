@@ -1,6 +1,7 @@
 local flow = require("engine/application/flow")
 local gamestate = require("engine/application/gamestate")
 require("engine/core/class")
+local codetuner = require("engine/debug/codetuner")
 local logging = require("engine/debug/logging")
 local profiler = require("engine/debug/profiler")
 local vlogger = require("engine/debug/visual_logger")
@@ -49,14 +50,24 @@ local function set_vlogger_active(checkbox)
     --  on only 3 lines to avoid hiding the ui above
     -- hotfix until we upgrade wtk: gui.x/y is currently ignored,
     --  so we must change the x/y of the v_layout widget instead
-    -- vlogger.window.gui.y = 98
-    vlogger.window.gui.children[1].y = 110
-    vlogger.window:show(3)
+    -- vlogger.window.gui.y = 116
+    vlogger.window.gui.children[1].y = 116
+    vlogger.window:show(2)
   else
     -- model: stop queuing log
     vlogger.vlog_stream.active = false
     -- view: hide vlogger window
     vlogger.window:hide()
+  end
+end
+
+local function set_codetuner_visible_active(checkbox)
+  if checkbox.value then
+    codetuner.active = true
+    codetuner:show()
+  else
+    codetuner.active = false
+    codetuner:hide()
   end
 end
 
@@ -113,6 +124,9 @@ function debug_demo:_init()
 
   t = wtk.checkbox.new("show visual logger", vlogger.window.gui.visible, set_vlogger_active)
   self.v_layout:add_child(t)
+
+  t = wtk.checkbox.new("show and activate code tuner", codetuner.active, set_codetuner_visible_active)
+  self.v_layout:add_child(t)
 end
 
 function debug_demo:on_enter()
@@ -142,6 +156,11 @@ function debug_demo:render()
   ui.print_centered("(x: back to main menu)", 64, y, colors.white)
 
   self.gui:draw()
+
+  -- demonstrate code tuner by drawing a rectangle at a tunable position, above the ui
+  local x0 = tuned("rect x", 64)
+  local y0 = tuned("rect y", 116)
+  rectfill(x0, y0, x0 + 8, y0 + 8, colors.yellow)
 end
 
 return debug_demo
