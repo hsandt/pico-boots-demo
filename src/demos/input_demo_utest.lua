@@ -99,7 +99,7 @@ describe('input_demo', function ()
       local s = assert.spy(ui.print_centered)
       s.was_called(2)
       s.was_called_with("input demo", 64, 6, colors.white)
-      s.was_called_with("(❎: back to main menu)", 64, 12, colors.white)
+      s.was_called_with("(x: back to main menu)", 64, 12, colors.white)
     end)
 
     it('should print the current state of each button', function ()
