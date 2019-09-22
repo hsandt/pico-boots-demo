@@ -35,7 +35,8 @@ describe('input_demo', function ()
       s.was_not_called()
     end)
 
-    it('(when input x is down) it should call _go_back', function ()
+    it('(when input left is down and x just pressed) it should call _go_back', function ()
+      input.players_btn_states[0][button_ids.left] = btn_states.pressed
       input.players_btn_states[0][button_ids.x] = btn_states.just_pressed
 
       input_demo_state:update()
@@ -99,7 +100,7 @@ describe('input_demo', function ()
       local s = assert.spy(ui.print_centered)
       s.was_called(2)
       s.was_called_with("input demo", 64, 6, colors.white)
-      s.was_called_with("(x: back to main menu)", 64, 12, colors.white)
+      s.was_called_with("(hold left + x: back to main menu)", 64, 12, colors.white)
     end)
 
     it('should print the current state of each button', function ()

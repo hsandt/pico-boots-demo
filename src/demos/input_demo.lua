@@ -20,7 +20,8 @@ function input_demo:on_exit()
 end
 
 function input_demo:update()
-  if input:is_just_pressed(button_ids.x) then
+  -- no chord system yet, so check holding + press manually
+  if input:is_down(button_ids.left) and input:is_just_pressed(button_ids.x) then
     self:_go_back()
   end
 end
@@ -36,7 +37,7 @@ function input_demo:render()
   local y = 6
   ui.print_centered("input demo", 64, y, colors.white)
   y = y + 6
-  ui.print_centered("(x: back to main menu)", 64, y, colors.white)
+  ui.print_centered("(hold left + x: back to main menu)", 64, y, colors.white)
   y = y + 12
 
   api.print("left: "..input:get_button_state(button_ids.left, 0), 10, y, colors.white)
