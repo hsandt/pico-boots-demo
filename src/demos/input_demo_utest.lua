@@ -137,17 +137,23 @@ describe('input_demo', function ()
             [button_ids.x] = btn_states.just_released
           }
         }
+
+        pico8.mousepos.x = 12
+        pico8.mousepos.y = 45
       end)
 
       teardown(function ()
         input:init()
+
+        pico8.mousepos.x = 0
+        pico8.mousepos.y = 0
       end)
 
       it('should print the current state of each button (with explanation)', function ()
         input_demo_state:render()
 
         local s = assert.spy(api.print)
-        s.was_called(16)
+        s.was_called(17)
 
         s.was_called_with("0: released  1: just pressed", 6, 24, colors.white)
         s.was_called_with("2: pressed   3: just released", 6, 30, colors.white)
@@ -167,6 +173,8 @@ describe('input_demo', function ()
         s.was_called_with("down: 3", 74, 70, colors.white)
         s.was_called_with("o: 2", 74, 76, colors.white)
         s.was_called_with("x: 3", 74, 82, colors.white)
+
+        s.was_called_with("cursor: (12, 45)", 20, 94, colors.white)
       end)
 
     end)

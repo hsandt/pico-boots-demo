@@ -34,6 +34,8 @@ function input_demo:render()
   cls()
 
   -- todo: use vertical_layout
+
+  -- print title and instructions
   local y = 6
   ui.print_centered("input demo", 64, y, colors.white)
   y = y + 6
@@ -44,6 +46,7 @@ function input_demo:render()
   api.print("2: pressed   3: just released", 6, y, colors.white)
   y = y + 12
 
+  -- visualize player input
   api.print("player 1", 20, y, colors.white)
   api.print("player 2", 74, y, colors.white)
   y = y + 10
@@ -64,6 +67,11 @@ function input_demo:render()
   y = y + 6
   api.print("x: "..input:get_button_state(button_ids.x, 0), 20, y, colors.white)
   api.print("x: "..input:get_button_state(button_ids.x, 1), 74, y, colors.white)
+  y = y + 12
+
+  -- visualize mouse cursor info
+  local cursor_pos = input.get_cursor_position()
+  api.print("cursor: ("..cursor_pos.x..", "..cursor_pos.y..")", 20, y, colors.white)
 end
 
 return input_demo
