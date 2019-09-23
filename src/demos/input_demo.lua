@@ -17,12 +17,16 @@ function input_demo:on_enter()
 end
 
 function input_demo:on_exit()
+  -- in case mouse was disabled, restore it so you can continue using it in other demos 
+  input:toggle_mouse(true)
 end
 
 function input_demo:update()
   -- no chord system yet, so check holding + press manually
   if input:is_down(button_ids.left) and input:is_just_pressed(button_ids.x) then
     self:_go_back()
+  elseif input:is_just_pressed(button_ids.o) then
+    input:toggle_mouse()
   end
 end
 
@@ -72,6 +76,9 @@ function input_demo:render()
   -- visualize mouse cursor info
   local cursor_pos = input.get_cursor_position()
   api.print("cursor: ("..cursor_pos.x..", "..cursor_pos.y..")", 20, y, colors.white)
+  y = y + 9
+
+  ui.print_centered("(o: toggle mouse input)", 64, y, colors.white)
 end
 
 return input_demo

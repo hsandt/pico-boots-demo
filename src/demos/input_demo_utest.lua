@@ -14,25 +14,52 @@ describe('input_demo', function ()
     input_demo_state = input_demo()
   end)
 
+  describe('on_exit', function ()
+
+    setup(function ()
+      stub(input, "toggle_mouse")
+    end)
+
+    teardown(function ()
+      input.toggle_mouse:revert()
+    end)
+
+    after_each(function ()
+      input.toggle_mouse:clear()
+    end)
+
+    it('should enable mouse input', function ()
+      input_demo_state:on_exit()
+
+      local s = assert.spy(input.toggle_mouse)
+      s.was_called(1)
+      s.was_called_with(match.ref(input), true)
+    end)
+
+  end)
+
   describe('update', function ()
 
     setup(function ()
       stub(input_demo, "_go_back")
+      stub(input, "toggle_mouse")
     end)
 
     teardown(function ()
       input_demo._go_back:revert()
+      input.toggle_mouse:revert()
     end)
 
     after_each(function ()
       input_demo._go_back:clear()
+      input.toggle_mouse:clear()
     end)
 
-    it('(when no input is down) it should not call _go_back', function ()
+    it('(when no input is down) it should not call anything', function ()
       input_demo_state:update()
 
-      local s = assert.spy(input_demo_state._go_back)
-      s.was_not_called()
+      assert.spy(input_demo_state._go_back).was_not_called()
+      assert.spy(input.toggle_mouse).was_not_called()
     end)
 
     describe('(when input left is down and x just pressed)', function ()
@@ -47,14 +74,31 @@ describe('input_demo', function ()
       end)
 
       it('it should call _go_back', function ()
-        input.players_btn_states[0][button_ids.left] = btn_states.pressed
-        input.players_btn_states[0][button_ids.x] = btn_states.just_pressed
-
         input_demo_state:update()
 
         local s = assert.spy(input_demo_state._go_back)
         s.was_called(1)
         s.was_called_with(match.ref(input_demo_state))
+      end)
+
+    end)
+
+    describe('(when input o is just pressed)', function ()
+
+      setup(function ()
+        input.players_btn_states[0][button_ids.o] = btn_states.just_pressed
+      end)
+
+      teardown(function ()
+        input:init()
+      end)
+
+      it('it should call input:toggle_mouse', function ()
+        input_demo_state:update()
+
+        local s = assert.spy(input.toggle_mouse)
+        s.was_called(1)
+        s.was_called_with(match.ref(input))
       end)
 
     end)
@@ -107,13 +151,15 @@ describe('input_demo', function ()
       assert.spy(cls).was_called(1)
     end)
 
-    it('should print the demo title and back input instruction', function ()
+    it('should print the demo title and input instructions', function ()
       input_demo_state:render()
 
       local s = assert.spy(ui.print_centered)
-      s.was_called(2)
+      s.was_called(3)
       s.was_called_with("input demo", 64, 6, colors.white)
       s.was_called_with("(hold left + x: back to main menu)", 64, 12, colors.white)
+
+      s.was_called_with("(o: toggle mouse input)", 64, 103, colors.white)
     end)
 
     describe('(with some inputs for both players)', function ()
