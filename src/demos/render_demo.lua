@@ -16,6 +16,27 @@ render_demo.type = ':render_demo'
 function render_demo:_init()
   self.gui = wtk.gui_root.new()
 
+  -- the button "play spin" should turn into "play idle" when the 'spin' animation is played,
+  --  and reversely, to allow toggling between the two
+  -- however, it is simpler to create 2 buttons and toggle their visibility than changing
+  --  the label and function of the button dynamically
+  self.play_spin_button = wtk.button.new("play spin", function ()
+      -- self is accessed from context here
+      self.gem_anim_sprite:play('spin')
+      self.play_spin_button.visible = false
+      self.play_idle_button.visible = true
+    end, colors.white)
+  self.gui:add_child(self.play_spin_button, 0, 20)
+
+  self.play_idle_button = wtk.button.new("play idle", function ()
+      -- self is accessed from context here
+      self.gem_anim_sprite:play('idle')
+      self.play_spin_button.visible = true
+      self.play_idle_button.visible = false
+    end, colors.white)
+  self.play_idle_button.visible = false
+  self.gui:add_child(self.play_idle_button, 0, 20)
+
   -- we decide to initialize objects on game start, and preserve them in on_exit
   --  because they are cheap; a bigger project would initialize in on_enter
   --  and clean in on_exit
@@ -23,7 +44,7 @@ function render_demo:_init()
 end
 
 function render_demo:on_enter()
-  self.gem_anim_sprite:play('shine')
+  self.gem_anim_sprite:play('idle')
 end
 
 function render_demo:on_exit()
@@ -56,7 +77,8 @@ function render_demo:render()
 end
 
 function render_demo:draw_sprites()
-  self.gem_anim_sprite:render(vector(64, 64))
+  visual_data.sprites.gem.idle:render(vector(44, 64))
+  self.gem_anim_sprite:render(vector(84, 64))
 end
 
 return render_demo
