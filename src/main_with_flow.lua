@@ -30,6 +30,7 @@ function _init()
   flow:add_gamestate(main_menu())
   flow:add_gamestate(debug_demo())
   flow:add_gamestate(input_demo())
+  flow:add_gamestate(render_demo())
   flow:query_gamestate_type(main_menu.type)
 
   -- enable mouse devkit

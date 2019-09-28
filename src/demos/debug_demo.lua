@@ -6,6 +6,7 @@ local logging = require("engine/debug/logging")
 local profiler = require("engine/debug/profiler")
 local vlogger = require("engine/debug/visual_logger")
 local input = require("engine/input/input")
+require("engine/render/color")
 local ui = require("engine/ui/ui")
 local wtk = require("wtk/pico8wtk")
 
