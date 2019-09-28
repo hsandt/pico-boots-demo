@@ -14,7 +14,7 @@ local main_menu = require("menu/main_menu")
 local debug_demo = require("demos/debug_demo")
 local input_demo = require("demos/input_demo")
 local render_demo = require("demos/render_demo")
-local visual = require("resources/visual")
+local visual_data = require("resources/visual_data")
 
 local demo_app = derived_class(gameapp)
 
@@ -41,7 +41,7 @@ end
 function demo_app.on_post_start() -- override
   -- enable mouse devkit
   input:toggle_mouse(true)
-  ui:set_cursor_sprite_data(visual.sprites.cursor)
+  ui:set_cursor_sprite_data(visual_data.sprites.cursor)
 end
 
 function demo_app.on_reset() -- override
