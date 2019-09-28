@@ -13,14 +13,16 @@ local sprites = {
 }
 
 local anim_sprites = {
-  gem_shine = animated_sprite_data.create(sprites.gem,
-    {"idle", "shine1", "shine2", "shine3", "shine2", "shine1"},
-    78, true)
+  gem = {
+    shine = animated_sprite_data.create(sprites.gem,
+      {"idle", "shine1", "shine2", "shine3", "shine2", "shine1"},
+      78, true)
+  }
 }
 
-local visual = {
+local visual_data = {
   sprites = sprites,
   anim_sprites = anim_sprites
 }
 
-return visual
+return visual_data

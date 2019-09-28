@@ -6,6 +6,8 @@ local input = require("engine/input/input")
 local ui = require("engine/ui/ui")
 local wtk = require("wtk/pico8wtk")
 
+local visual_data = require("resources/visual_data")
+
 describe('render_demo', function ()
 
   local render_demo_state
@@ -18,6 +20,11 @@ describe('render_demo', function ()
 
     it('should create a gui root', function ()
       assert.are_equal(wtk.gui_root, getmetatable(render_demo_state.gui))
+    end)
+
+    it('should create gem animated sprite', function ()
+      assert.is_not_nil(render_demo_state.gem_anim_sprite)
+      assert.are_equal(visual_data.anim_sprites.gem, render_demo_state.gem_anim_sprite.data_table)
     end)
 
   end)

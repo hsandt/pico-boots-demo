@@ -5,6 +5,8 @@ require("engine/render/color")
 local ui = require("engine/ui/ui")
 local wtk = require("wtk/pico8wtk")
 
+local visual_data = require("resources/visual_data")
+
 -- main menu: gamestate for player navigating in main menu
 local render_demo = derived_class(gamestate)
 
@@ -12,6 +14,11 @@ render_demo.type = ':render_demo'
 
 function render_demo:_init()
   self.gui = wtk.gui_root.new()
+
+  -- we decide to initialize objects on game start, and preserve them in on_exit
+  --  because they are cheap; a bigger project would initialize in on_enter
+  --  and clean in on_exit
+  self.gem_anim_sprite = animated_sprite(visual_data.anim_sprites.gem)
 end
 
 function render_demo:on_enter()
@@ -46,7 +53,7 @@ function render_demo:render()
 end
 
 function render_demo:draw_sprites()
-end
 
+end
 
 return render_demo
