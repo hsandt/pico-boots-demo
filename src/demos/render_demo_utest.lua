@@ -105,18 +105,21 @@ describe('render_demo', function ()
       -- spy gui_root.draw, but also stub to avoid
       --  having indirect calls to low-level render functions, making it hard to count them
       stub(wtk.gui_root, "draw")
+      stub(render_demo, "draw_sprites")
     end)
 
     teardown(function ()
       cls:revert()
       ui.print_centered:revert()
       wtk.gui_root.draw:revert()
+      render_demo.draw_sprites:revert()
     end)
 
     after_each(function ()
       cls:clear()
       ui.print_centered:clear()
       wtk.gui_root.draw:clear()
+      render_demo.draw_sprites:clear()
     end)
 
     it('should clear screen', function ()
@@ -140,6 +143,14 @@ describe('render_demo', function ()
       local s = assert.spy(render_demo_state.gui.draw)
       s.was_called(1)
       s.was_called_with(match.ref(render_demo_state.gui))
+    end)
+
+    it('should draw the demo sprites', function ()
+      render_demo_state:render()
+
+      local s = assert.spy(render_demo_state.draw_sprites)
+      s.was_called(1)
+      s.was_called_with(match.ref(render_demo_state))
     end)
 
   end)

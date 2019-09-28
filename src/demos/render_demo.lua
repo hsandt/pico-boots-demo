@@ -1,5 +1,6 @@
 local flow = require("engine/application/flow")
 local input = require("engine/input/input")
+local animated_sprite = require("engine/render/animated_sprite")
 require("engine/render/color")
 local ui = require("engine/ui/ui")
 local wtk = require("wtk/pico8wtk")
@@ -40,6 +41,12 @@ function render_demo:render()
   ui.print_centered("(x: back to main menu)", 64, y, colors.white)
 
   self.gui:draw()
+
+  self:draw_sprites()
 end
+
+function render_demo:draw_sprites()
+end
+
 
 return render_demo
