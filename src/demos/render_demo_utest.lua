@@ -2,6 +2,7 @@ require("engine/test/bustedhelper")
 local render_demo = require("demos/render_demo")
 
 local flow = require("engine/application/flow")
+require("engine/core/math")
 local input = require("engine/input/input")
 local ui = require("engine/ui/ui")
 local wtk = require("wtk/pico8wtk")
@@ -29,21 +30,55 @@ describe('render_demo', function ()
 
   end)
 
+  describe('on_enter', function ()
+
+    setup(function ()
+      stub(animated_sprite, "play")
+    end)
+
+    teardown(function ()
+      animated_sprite.play:revert()
+    end)
+
+    after_each(function ()
+      animated_sprite.play:clear()
+    end)
+
+    it('should play gem "shine" animation', function ()
+      render_demo_state:on_enter()
+
+      assert.spy(animated_sprite.play).was_called(1)
+      assert.spy(animated_sprite.play).was_called_with(render_demo_state.gem_anim_sprite, 'shine')
+    end)
+
+  end)
+
   describe('update', function ()
 
     setup(function ()
       stub(wtk.gui_root, "update")
+      stub(animated_sprite, "update")
       stub(render_demo, "_go_back")
     end)
 
     teardown(function ()
       wtk.gui_root.update:revert()
+      animated_sprite.update:revert()
       render_demo._go_back:revert()
     end)
 
     after_each(function ()
       wtk.gui_root.update:clear()
+      animated_sprite.update:clear()
       render_demo._go_back:clear()
+    end)
+
+    it('should update gem animated sprite', function ()
+      render_demo_state:update()
+
+      local s = assert.spy(animated_sprite.update)
+      s.was_called(1)
+      s.was_called_with(match.ref(render_demo_state.gem_anim_sprite))
     end)
 
     it('should update render_demo gui', function ()
@@ -158,6 +193,29 @@ describe('render_demo', function ()
       local s = assert.spy(render_demo_state.draw_sprites)
       s.was_called(1)
       s.was_called_with(match.ref(render_demo_state))
+    end)
+
+  end)
+
+  describe('draw_sprites', function ()
+
+    setup(function ()
+      stub(animated_sprite, "render")
+    end)
+
+    teardown(function ()
+      animated_sprite.render:revert()
+    end)
+
+    after_each(function ()
+      animated_sprite.render:clear()
+    end)
+
+    it('should draw the animated gem sprite at some position', function ()
+      render_demo_state:render()
+
+      assert.spy(animated_sprite.render).was_called(1)
+      assert.spy(animated_sprite.render).was_called_with(render_demo_state.gem_anim_sprite, vector(64, 64))
     end)
 
   end)

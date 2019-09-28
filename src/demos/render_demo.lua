@@ -1,4 +1,5 @@
 local flow = require("engine/application/flow")
+require("engine/core/math")
 local input = require("engine/input/input")
 local animated_sprite = require("engine/render/animated_sprite")
 require("engine/render/color")
@@ -22,6 +23,7 @@ function render_demo:_init()
 end
 
 function render_demo:on_enter()
+  self.gem_anim_sprite:play('shine')
 end
 
 function render_demo:on_exit()
@@ -29,6 +31,7 @@ end
 
 function render_demo:update()
   self.gui:update()
+  self.gem_anim_sprite:update()
 
   if input:is_just_pressed(button_ids.x) then
     self:_go_back()
@@ -53,7 +56,7 @@ function render_demo:render()
 end
 
 function render_demo:draw_sprites()
-
+  self.gem_anim_sprite:render(vector(64, 64))
 end
 
 return render_demo
