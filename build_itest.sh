@@ -12,7 +12,7 @@ build_output_path="$(dirname "$0")/build"
 # Configuration: cartridge
 author="hsandt"
 title="pico-boots demo itests (all)"
-cartridge_name="itest_all"
+cartridge_name="picoboots_demo_itest_all"
 
 # Build from itest main for all itests
 "$picoboots_scripts_path/build_game.sh"               \
