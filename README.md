@@ -17,13 +17,13 @@ You can both try the demos directly by running the game (see "Build and run" sec
 
 ### Supported platforms
 
-The build and test pipeline has been tested on Linux Ubuntu. Other Linux distributions and UNIX platforms should be able to run most scripts, providing the right tools are installed.
+Mostly UNIX, and specifically Linux for some scripts.
 
-Development environments for Windows such as MinGW and Cygwin have not been tested.
+See Supported platforms in [pico-boots](https://github.com/hsandt/pico-boots) README for more information.
 
 ### Build dependencies
 
-See Build dependencies in [pico-boots](https://github.com/hsandt/pico-boots) README.
+See *Build dependencies* in [pico-boots](https://github.com/hsandt/pico-boots) README.
 
 ### Build and run
 
@@ -32,12 +32,12 @@ First, make sure the `pico8` executable is in your path.
 The most straightforward way to build and run the game on Unix platforms is:
 
 * `cd path/to/pico-boots-demo`
-* `./build.sh`
-* `./run.sh`
+* `./build_game.sh`
+* `./run_game.sh`
 
 ### Test dependencies
 
-See Test dependencies in [pico-boots](https://github.com/hsandt/pico-boots) README.
+See *Test dependencies* in [pico-boots](https://github.com/hsandt/pico-boots) README.
 
 ### Run unit tests and headless integration tests
 
@@ -45,6 +45,14 @@ To run all the (non-#mute) unit tests:
 
 * `cd path/to/pico-boots-demo`
 * `./test.sh`
+
+### Run rendered integration tests
+
+Integration tests consists in actual game simulations in predetermined scenarios. Therefore, they are built with picotool and run directly in PICO-8. To build the integration test cartridge and run it:
+
+* `cd path/to/pico-boots-demo`
+* `./build_itest.sh`
+* `./run_itest.sh`
 
 ## Coding conventions
 
