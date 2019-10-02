@@ -161,7 +161,7 @@
 			"syntax": "Packages/Python/Python.sublime-syntax"
 		},
 		{
-			"name": "Postbuild: test add_metadata",
+			"name": "Engine: Postbuild: test add_metadata",
 			"working_dir": "${project_path}/pico-boots",
 			"shell": true,
 			"cmd": ["python3 -m scripts.test_add_metadata"],
@@ -169,7 +169,7 @@
 			"syntax": "Packages/Python/Python.sublime-syntax"
 		},
 		{
-			"name": "Postbuild: test add_require",
+			"name": "Engine: Postbuild: test add_require",
 			"working_dir": "${project_path}/pico-boots",
 			"shell": true,
 			"cmd": ["python3 -m scripts.test_add_require"],
@@ -177,7 +177,7 @@
 			"syntax": "Packages/Python/Python.sublime-syntax"
 		},
 		{
-			"name": "Postbuild: test minify",
+			"name": "Engine: Postbuild: test minify",
 			"working_dir": "${project_path}/pico-boots",
 			"shell": true,
 			"cmd": ["python3 -m scripts.test_minify"],
