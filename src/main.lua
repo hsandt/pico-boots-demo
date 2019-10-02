@@ -1,7 +1,7 @@
 -- main entry file that uses the gameapp module for a quick bootstrap
 -- the gameapp is also useful for integration tests
 
--- must require at main top, to be used in any required modules from here
+-- we must require engine/pico8/api at the top of our main.lua, so API bridges apply to all modules
 require("engine/pico8/api")
 
 local demo_app = require("application/demo_app")
