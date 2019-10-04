@@ -33,7 +33,16 @@ The most straightforward way to build and run the game on Unix platforms is:
 
 * `cd path/to/pico-boots-demo`
 * `./build_game.sh`
-* `./run_game.sh`
+* `./run_game_debug.sh`
+
+Instead of the last instruction, you can also enter directly:
+* `pico8 -run build/picoboots_demo_debug.p8`
+
+`build_game.sh` will build with the `debug` config by default, which means it will define preprocessing symbols to preserve debugging features. You will need this to try the debug demo from the main menu. However, to demonstrate how we can release a game stripped of extraneous features to fit in a PICO-8 cartridge, we also added a `release` config:
+
+* `cd path/to/pico-boots-demo`
+* `./build_game.sh` release
+* `./run_game_release.sh`
 
 ### Test dependencies
 

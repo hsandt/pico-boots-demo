@@ -28,9 +28,16 @@
 			"name": "Game: build game",
 			"working_dir": "${project_path}",
 			"shell": true,
-			"cmd": ["./build_game.sh"],
+			"cmd": ["./build_game.sh debug"],
 			"file_regex": "(.*\\.sh)(?:\\: line )([\\d]+)(?:\\:)([\\d]+)? (.*)",
-			"syntax": "Packages/Python/Python.sublime-syntax"
+			"syntax": "Packages/Python/Python.sublime-syntax",
+			"variants":
+			[
+				{
+					"name": "release",
+					"cmd": ["./build_game.sh release"]
+				}
+			]
 		},
 		{
 			"name": "Game: build itests",
@@ -41,21 +48,25 @@
 			"syntax": "Packages/Python/Python.sublime-syntax"
 		},
 		{
-			"name": "Game: build and run",
+			"name": "Game: build and reload or run",
 			"working_dir": "${project_path}",
 			"shell": true,
-			"cmd": ["./build_game.sh && ./run_game.sh"],
+			"cmd": ["./build_game.sh debug && (./pico-boots/scripts/reload.sh || ./run_game_debug.sh)"],
 			"file_regex": "(.*\\.sh)(?:\\: line )([\\d]+)(?:\\:)([\\d]+)? (.*)",
 			"syntax": "Packages/Python/Python.sublime-syntax",
 			"variants":
 			[
+				{
+					"name": "release",
+					"cmd": ["./build_game.sh release && (./pico-boots/scripts/reload.sh || ./run_game_release.sh)"]
+				},
 				{
 					"name": "(main_with_flow)",
 					"cmd": ["./build_main_with_flow.sh && ./run_game_with_flow.sh"],
 				},
 				{
 					"name": "itests",
-					"cmd": ["./build_itest.sh && ./run_itest.sh"],
+					"cmd": ["./build_itest.sh && (./pico-boots/scripts/reload.sh || ./run_itest.sh)"],
 				}
 			]
 		},
@@ -63,8 +74,19 @@
 			"name": "Game: run",
 			"working_dir": "${project_path}",
 			"shell": true,
-			"cmd": ["./run_game.sh"],
-			"syntax": "Packages/Python/Python.sublime-syntax"
+			"cmd": ["./run_game_debug.sh"],
+			"syntax": "Packages/Python/Python.sublime-syntax",
+			"variants":
+			[
+				{
+					"name": "release",
+					"cmd": ["./run_game_release.sh"]
+				},
+				{
+					"name": "itests",
+					"cmd": ["./run_itest.sh"],
+				}
+			]
 		},
 		{
 			"name": "Game: test",
