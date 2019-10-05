@@ -23,19 +23,6 @@ function demo_app.instantiate_gamestates() -- override
 end
 
 function demo_app.on_pre_start() -- override
-  -- register console log stream to output logs to the console
-  -- do this in pre-start so we can access log as early as possible
-  logging.logger:register_stream(logging.console_log_stream)
-  logging.logger:register_stream(logging.file_log_stream)
-  logging.file_log_stream.file_prefix = "pico_boots_demo"
-  logging.logger:register_stream(vlogger.vlog_stream)
-  -- start inactive (important to avoid uninitialized _msg_queue error
-  --  when logging before calling set_vlogger_active in debug_demo)
-  vlogger.vlog_stream.active = false
-
-  -- clear log file on new game session (or to preserve the previous log,
-  -- you could add a newline and some "[SESSION START]" tag instead)
-  logging.file_log_stream:clear()
 end
 
 function demo_app.on_post_start() -- override
