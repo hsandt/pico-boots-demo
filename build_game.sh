@@ -69,7 +69,7 @@ fi
 symbols=''
 
 if [[ $config == 'debug' ]]; then
-  symbols='assert,log,visual_logger,tuner,profiler'
+  symbols='assert,log,visual_logger,tuner,profiler,mouse'
 fi
 
 # Build from main

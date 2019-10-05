@@ -16,13 +16,16 @@ build_output_path="$(dirname "$0")/build"
 author="hsandt"
 title="pico-boots demo itests (all)"
 cartridge_name="picoboots_demo_itest_all"
-symbols='assert,log,visual_logger,tuner,profiler'
+config='debug'
+symbols='assert,log,visual_logger,tuner,profiler,mouse,itest'
 
 # Build from itest main for all itests
-"$picoboots_scripts_path/build_game.sh"               \
+"$picoboots_scripts_path/build_cartridge.sh"          \
   "$game_src_path" itest_main.lua itests              \
   -d "$data_path/data.p8" -M "$data_path/metadata.p8" \
   -a "$author" -t "$title"                            \
-  -o "$build_output_path/$cartridge_name.p8"          \
+  -p "$build_output_path"                             \
+  -o "${cartridge_name}"                              \
+  -c "$config"                                        \
   -s "$symbols"                                       \
   --minify
