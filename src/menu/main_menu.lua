@@ -1,6 +1,5 @@
 local gamestate = require("engine/application/gamestate")
 require("engine/core/class")
-local input = require("engine/input/input")
 require("engine/render/color")
 local ui = require("engine/ui/ui")
 

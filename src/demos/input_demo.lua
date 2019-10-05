@@ -5,7 +5,7 @@ local input = require("engine/input/input")
 require("engine/render/color")
 local ui = require("engine/ui/ui")
 
--- main menu: gamestate for player navigating in main menu
+-- input demo: gamestate to demonstrate input features
 local input_demo = derived_class(gamestate)
 
 input_demo.type = ':input_demo'
@@ -17,7 +17,7 @@ function input_demo:on_enter()
 end
 
 function input_demo:on_exit()
-  -- in case mouse was disabled, restore it so you can continue using it in other demos 
+  -- in case mouse was disabled, restore it so you can continue using it in other demos
   input:toggle_mouse(true)
 end
 

@@ -8,7 +8,7 @@ local wtk = require("wtk/pico8wtk")
 
 local visual_data = require("resources/visual_data")
 
--- main menu: gamestate for player navigating in main menu
+-- render demo: gamestate to demonstrate render features
 local render_demo = derived_class(gamestate)
 
 render_demo.type = ':render_demo'

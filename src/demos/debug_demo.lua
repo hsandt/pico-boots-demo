@@ -81,7 +81,7 @@ local function log_dump_test_table()
   log(dump(test_table))
 end
 
--- main menu: gamestate for player navigating in main menu
+-- debug demo: gamestate to demonstrate debug features
 local debug_demo = derived_class(gamestate)
 
 debug_demo.type = ':debug_demo'
