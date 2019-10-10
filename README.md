@@ -12,6 +12,8 @@ You can both try the demos directly by running the game (see "Build and run" sec
 * `main.lua` shows how to use the Flow system with gamestates. There is no specific demo for it, the whole app uses it, with 1 state for the main menu and 1 state per demo.
 * `main_menu.lua` shows how to make a simple menu using the UI and Input modules. You will see the main menu when starting the app.
 * `input_demo.lua` shows how to detect player input. In the main menu, select "INPUT DEMO", then press the different buttons (arrows and X/O in PICO-8) to see the input states change.
+* `debug_demo.lua` shows debugging features: console and on-screen logging, profiling and variable tuning. In the main menu, select "DEBUG DEMO", then play with the toggles and buttons to show logs, the profiling window and the variable tuning window.
+* `render_demo.lua` shows static and animated sprites. Press the button to toggle between different animations.
 
 ## Build
 
