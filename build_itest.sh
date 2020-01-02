@@ -28,4 +28,4 @@ symbols='assert,log,visual_logger,tuner,profiler,mouse,itest'
   -o "${cartridge_name}"                              \
   -c "$config"                                        \
   -s "$symbols"                                       \
-  --minify
+  --minify-level 2

@@ -81,4 +81,4 @@ fi
   -o "$cartridge_name"                                   \
   -c "$config"                                           \
   -s "$symbols"                                          \
-  --minify
+  --minify-level 2
