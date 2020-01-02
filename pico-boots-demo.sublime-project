@@ -13,6 +13,13 @@
 	"build_systems":
 	[
 		{
+			"name": "Setup pico-boots npm",
+			"working_dir": "${project_path}/pico-boots",
+			"shell": true,
+			"cmd": ["./setup.sh"],
+			"syntax": "Packages/Python/Python.sublime-syntax",
+		},
+		{
 			"name": "Game: edit data",
 			"shell": true,
 			"cmd": ["./edit_data.sh"],
