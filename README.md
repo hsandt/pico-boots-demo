@@ -7,6 +7,8 @@ This project demonstrates the features of the [pico-boots framework for PICO-8](
 
 You can both try the demos directly by running the game (see "Build and run" section) and read the corresponding source code.
 
+CAUTION: the current project is too big to fit in an official PICO-8 cartridge, as it has more than 8192 tokens.
+
 ## Demos
 
 * `main.lua` shows how to use the Flow system with gamestates. There is no specific demo for it, the whole app uses it, with 1 state for the main menu and 1 state per demo.
