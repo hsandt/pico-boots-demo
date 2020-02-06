@@ -62,6 +62,7 @@ local function set_vlogger_active(checkbox)
   end
 end
 
+--#if tuner
 local function set_codetuner_visible_active(checkbox)
   if checkbox.value then
     codetuner.active = true
@@ -71,6 +72,7 @@ local function set_codetuner_visible_active(checkbox)
     codetuner:hide()
   end
 end
+--#endif
 
 local test_table = {
   value = 5,
@@ -126,8 +128,10 @@ function debug_demo:_init()
   t = wtk.checkbox.new("show visual logger", vlogger.window.gui.visible, set_vlogger_active)
   self.v_layout:add_child(t)
 
+--#if tuner
   t = wtk.checkbox.new("show and activate code tuner", codetuner.active, set_codetuner_visible_active)
   self.v_layout:add_child(t)
+--#endif
 end
 
 function debug_demo:on_enter()
