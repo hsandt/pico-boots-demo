@@ -4,13 +4,20 @@
 require("engine/pico8/api")
 
 require("engine/test/integrationtest")
-local demo_app = require("application/demo_app")
--- tag to add require for itest files here
---[[add_require]]
 
 --#if log
 local logging = require("engine/debug/logging")
 --#endif
+
+local demo_app = require("application/demo_app")
+
+-- set app immediately so during itest registration by require,
+--   time_trigger can access app fps
+local app = demo_app()
+itest_runner.app = app
+
+-- tag to add require for itest files here
+--[[add_require]]
 
 local current_itest_index = 0
 
@@ -19,13 +26,13 @@ function _init()
   -- register log streams to output logs to both the console and the file log
   logging.logger:register_stream(logging.console_log_stream)
   logging.logger:register_stream(logging.file_log_stream)
+  logging.file_log_stream.file_prefix = "picoboots_demo"
 
   -- clear log file on new itest session
   logging.file_log_stream:clear()
 --#endif
 
-  itest_runner.app = demo_app()
-  demo_app.initial_gamestate = ':main_menu'
+  app.initial_gamestate = ':main_menu'
 
   -- start first itest
   init_game_and_start_next_itest()
