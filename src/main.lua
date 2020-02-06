@@ -11,6 +11,8 @@ local logging = require("engine/debug/logging")
 local vlogger = require("engine/debug/visual_logger")
 --#endif
 
+local app = demo_app()
+
 function _init()
   --#if log
   -- start logging before app in case we need to read logs about app start itself
@@ -27,14 +29,14 @@ function _init()
   vlogger.vlog_stream.active = false
 --#endif
 
-  demo_app.initial_gamestate = ':main_menu'
-  demo_app:start()
+  app.initial_gamestate = ':main_menu'
+  app:start()
 end
 
 function _update60()
-  demo_app:update()
+  app:update()
 end
 
 function _draw()
-  demo_app:draw()
+  app:draw()
 end
