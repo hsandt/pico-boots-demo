@@ -6,8 +6,10 @@ require("engine/pico8/api")
 
 local demo_app = require("application/demo_app")
 
+--#if log
 local logging = require("engine/debug/logging")
 local vlogger = require("engine/debug/visual_logger")
+--#endif
 
 function _init()
   --#if log
