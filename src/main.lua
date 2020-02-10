@@ -18,7 +18,8 @@ function _init()
   -- start logging before app in case we need to read logs about app start itself
   logging.logger:register_stream(logging.console_log_stream)
   logging.logger:register_stream(logging.file_log_stream)
-  logging.file_log_stream.file_prefix = "wit_fight"
+  logging.logger:register_stream(vlogger.vlog_stream)
+  logging.file_log_stream.file_prefix = "pico_boots_demo"
 
   -- clear log file on new game session (or to preserve the previous log,
   -- you could add a newline and some "[SESSION START]" tag instead)

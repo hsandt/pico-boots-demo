@@ -20,8 +20,8 @@ function _init()
   -- register console log stream to output logs to the console
   logging.logger:register_stream(logging.console_log_stream)
   logging.logger:register_stream(logging.file_log_stream)
-  logging.file_log_stream.file_prefix = "pico_boots_demo_with_flow"
   logging.logger:register_stream(vlogger.vlog_stream)
+  logging.file_log_stream.file_prefix = "pico_boots_demo_with_flow"
 
   -- clear log file on new game session (or to preserve the previous log,
   -- you could add a newline and some "[SESSION START]" tag instead)
