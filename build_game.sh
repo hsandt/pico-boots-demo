@@ -55,7 +55,7 @@ while [[ $# -gt 0 ]]; do
 done
 
 if ! [[ ${#positional_args[@]} -ge 0 && ${#positional_args[@]} -le 1 ]]; then
-  echo "Wrong number of positional arguments: found ${#positional_args[@]}, expected 1."
+  echo "Wrong number of positional arguments: found ${#positional_args[@]}, expected 0 or 1."
   echo "Passed positional arguments: ${positional_args[@]}"
   usage
   exit 1
@@ -81,4 +81,4 @@ fi
   -o "$cartridge_name"                                   \
   -c "$config"                                           \
   -s "$symbols"                                          \
-  --minify-level 2
+  --minify-level 1
