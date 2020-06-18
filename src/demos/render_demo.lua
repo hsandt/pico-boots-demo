@@ -10,7 +10,7 @@ local wtk = require("wtk/pico8wtk")
 local visual_data = require("resources/visual_data")
 
 -- render demo: gamestate to demonstrate render features
-local render_demo = new_class(gamestate)
+local render_demo = derived_class(gamestate)
 
 render_demo.type = ':render_demo'
 

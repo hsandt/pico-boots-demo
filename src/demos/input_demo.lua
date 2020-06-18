@@ -6,7 +6,7 @@ require("engine/render/color")
 local ui = require("engine/ui/ui")
 
 -- input demo: gamestate to demonstrate input features
-local input_demo = new_class(gamestate)
+local input_demo = derived_class(gamestate)
 
 input_demo.type = ':input_demo'
 

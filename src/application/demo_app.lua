@@ -16,7 +16,7 @@ local input_demo = require("demos/input_demo")
 local render_demo = require("demos/render_demo")
 local visual_data = require("resources/visual_data")
 
-local demo_app = new_class(gameapp)
+local demo_app = derived_class(gameapp)
 
 function demo_app:_init()
   gameapp._init(self, fps30)

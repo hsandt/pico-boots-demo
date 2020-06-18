@@ -84,7 +84,7 @@ local function log_dump_test_table()
 end
 
 -- debug demo: gamestate to demonstrate debug features
-local debug_demo = new_class(gamestate)
+local debug_demo = derived_class(gamestate)
 
 debug_demo.type = ':debug_demo'
 
