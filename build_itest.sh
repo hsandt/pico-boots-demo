@@ -16,7 +16,7 @@ build_output_path="$(dirname "$0")/build"
 author="hsandt"
 title="pico-boots demo itests (all)"
 cartridge_name="picoboots_demo_itest_all"
-config='debug'
+config='itest'
 symbols='assert,log,visual_logger,tuner,profiler,mouse,itest'
 
 # Build from itest main for all itests
